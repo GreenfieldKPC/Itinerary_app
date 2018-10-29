@@ -15,5 +15,16 @@
   "bugs": {
     "url": "https://github.com/GreenfieldKPC/Itinerary_app/issues"
   },
-  "homepage": "https://github.com/GreenfieldKPC/Itinerary_app#readme"
+  "homepage": "https://github.com/GreenfieldKPC/Itinerary_app#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongodb": "^3.1.8",
+    "mongoose": "^5.3.7",
+    "passport": "^0.4.0",
+    "vue": "^2.5.17",
+    "vue-cli": "^2.9.6",
+    "yarn": "^1.10.1"
+  }
 }
