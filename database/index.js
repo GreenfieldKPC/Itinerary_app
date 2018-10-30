@@ -27,22 +27,31 @@ const userSchema = mongoose.Schema({
     },
     created_at: Date,
     updated_at: Date,
+    
     // how to store multiple interests?
-    interests: {
-        type: String,
-        unique: true,
-        required: true,
-        trim: true
-    }
+
+    // interests: {
+    //     type: String,
+    //     unique: true,
+    //     required: true,
+    //     trim: true
+    // },
+    // interests: [
+    //     { type: mongoose.Schema.ObjectId, ref: 'UserInterests' }
+    // ]
 });
 
 const User = mongoose.model('User', userSchema);
 
-const save = (users) => {
+const createAndSaveUser = (users) => {
     // This function should save a user profile to
     // the MongoDB database
 
 };
+// update profile function
+// update interests function
+// schema for user itenerary?
+
 
 module.exports.User = User;
-module.exports.save = save;
+module.exports.createAndSaveUser = createAndSaveUser;
