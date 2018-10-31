@@ -19,6 +19,28 @@ const getTopRestaurants = function(location, callback) {
     }
   })
 }
+
+
+const getEvent = function (callback) {
+  request.get({
+    url: "https://www.eventbriteapi.com/v3/users/me/?token=SESXYS4X3FJ5LHZRWGKQ",
+    headers: {
+      'Authorization': `${config.Event}`
+    }
+
+  }, (err, res) => {
+    if (err) {
+      console.log(err);
+      callback(err, null);
+    } else {
+      return callback(null, res);
+    }
+  })
+}
+
+
 module.exports = {
-  getTopRestaurants
+  getTopRestaurants,
+  getEvent
+
 }
