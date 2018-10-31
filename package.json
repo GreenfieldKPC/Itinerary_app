@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server/index.js"
+    "start": "node server/index.js",
     "server-dev": "nodemon server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -47,7 +47,7 @@
     "vue-html-loader": "^1.0.0",
     "vue-loader": "^7.3.0",
     "webpack": "^1.12.2",
-    "webpack-cli": "^3.1.2"
+    "webpack-cli": "^3.1.2",
     "eslint": "^5.8.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
