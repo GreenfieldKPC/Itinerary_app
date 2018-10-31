@@ -16,19 +16,29 @@ const Result = Vue.component('result', {
     }
   }
 })
-
+const Events = Vue.component('event', {
+  template: '<li>{{ event.name }} <a :href="calendarURL" target="_blank">Add to Calendar</a></li>',
+  props: ['event'],
+  computed: {
+    calendarURL() {
+      return `https://www.google.com/calendar/render?action=TEMPLATE&text=${this.name}`
+    }
+  }
+})
 // MAIN APP COMPONENT
 const app = new Vue({
   el: '#app',
   components: {
-    result: Result
+    result: Result,
+    event: Events
   },
   data() {
     return {
       //updates from v-model text input search
       location: "",
       //array of businesses returned from location query to yelp api
-      results: []
+      results: [],
+      events: []
     }
   },
   methods: {
@@ -42,6 +52,13 @@ const app = new Vue({
         const stuff = JSON.parse(data);
         this.results = stuff.businesses
         console.log(this.results);
+      })
+      fetch(`/event/${location}`)
+      .then(res => {
+        return res;
+      }).then((result) => {
+        console.log(result);
+        this.events = result;
       })
     }
   }

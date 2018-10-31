@@ -30,7 +30,18 @@ app.get('/loc/:locationID', (req, res) => {
   })
 });
 
-
+app.get('/event/:locationId', (req, res) => {
+  console.log(req.body);
+  const location = req.path.slice(5);
+  handler.getEvent(location, (err, result) => {
+    if (err) {
+      console.log(err, 'events');
+    } else {
+      console.log(result);
+      res.json(result);
+    }
+  })
+});
 
 // app.get('/login', (req, res) => {
 //   res.render('login');
