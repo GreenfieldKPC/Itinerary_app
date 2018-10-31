@@ -1,27 +1,26 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 // const path = require('path');
-// const db = require(''); // needs to require towards the database
-
+const db = require('../database/index.js'); // needs to require towards the database
+const handler = require('../requesthandler/'); // this helper get the information from the yelp api
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // app.use(express.static(path.join(''))); // path to the front end
 
-// app.get('/', (req, res) => {
-// // all the user liked preference from the database then sends it to the client
-// db.selectAll((err, result) => {
-//   if (err) {
-//     console.log(err);
-//   } else {
-//     res.status(200).send(result); 
-//   }
-// })
-// });
 app.get('/', (req, res) => {
-console.log(req.body);
-res.send('Hello World')
+// all the user liked preference from the database then sends it to the client
+
+});
+app.get('/login', (req, res) => {
+  res.render('login');
+});
+app.post('/login', (req, res) => {
+
+});
+app.get('/signup', function (req, res) {
+  res.render('signup');
 });
 /*
 endpoints for yelp get request

@@ -1,11 +1,11 @@
 const request = require('request');
-
+const config = require('../config.js');
 const getTopRestaurants = function(callback) {
   const option = {
     url: "https://api.yelp.com/v3/businesses/",
     headers: {
       'User-Agent': 'request',
-      'Authorization': 'token',
+      'Authorization': `${config.TOKENs}`,
       'maxResult': 5
     }
   }
