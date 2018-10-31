@@ -24,8 +24,8 @@ const userProfileSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    created_at: Date,
-    updated_at: Date,
+    created_at: { type: Date, default: Date.now },
+    updated_at: { type: Date, default: null },
     interests: {
         cocktails: { type: Boolean, lowercase: true, },
         pizza: { type: Boolean, lowercase: true, },
@@ -49,8 +49,6 @@ const createUserProfile = (userObj, cb) => {
         email: userObj.email,
         password: userObj.password,
         passwordConf: userObj.passwordConf,
-        created_at: Date.now(),
-        updated_at: null,
         interests: {
             cocktails: false,
             pizza: false,
@@ -73,17 +71,49 @@ const createUserProfile = (userObj, cb) => {
 // update interests function
 // accepts username and interest to be updated
 // changes boolean value of interest on user profile
-const updateInterests = (username, interest) => {
+const updateInterests = (updateObj, cb) => {
+    // update time
+    let query = { username: updateObj.username };
+    let setObject = {};
+    // update interest
+    setObject["interests." + updateObj.interest] = true;
+    // update timestamp
+    // setObject["updated_at"] = Date.now();
 
+    UserProfile.findOne(query, (err, profile) => {
+        if (err) {
+            console.error(err);
+            cb(err, 'error updating interest');
+        } else {
+            profile.updated_at = Date.now();
+            let prop = JSON.stringify(Object.keys(setObject)[0]);
+            console.log(Object.keys(profile.interests), 'bool');
+            profile[Object.keys(setObject)[0]] = !profile[Object.keys(setObject)[0]];
+            profile.save((err) => {
+                if (err) {
+                    console.error(err, 'error saving updated interest');
+                    cb(err);
+                }
+            })
+        }
+    });
 };
 
 // update profile function
 // accepts username and object with property and value to be updated
 // changes value of property on user profile
-const updateProfile = (username, propObj) => {
-
+const updateProfile = (username, propObj, cb) => {
+    let query = { username };
+    UserProfile.updateOne(query, propObj, (err) => {
+        if (err) {
+            console.error(err);
+            cb(err, 'error updating interest');
+        } 
+    });
 };
 
 
 module.exports.UserProfile = UserProfile;
 module.exports.createUserProfile = createUserProfile;
+module.exports.updateInterests = updateInterests;
+module.exports.updateProfile = updateProfile;

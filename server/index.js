@@ -20,7 +20,7 @@ app.get('/interests')
 
 app.get('/profile')
 
-//req.body needs username, email, password, passwordConf
+//req.body needs username, email, password, passwordConf (short for password confirmation)
 app.post('/signup', (req, res) => {
     db.createUserProfile(req.body, (err) => {
         if (err) {
@@ -31,9 +31,27 @@ app.post('/signup', (req, res) => {
     res.end();
 });
 
-app.patch('/interests')
+// req.body needs username and interest with value of interest that was clicked
+app.patch('/interests', (req, res) => {
+    db.updateInterests(req.body, (err) => {
+        if (err) {
+            // notify user of error
+            console.error(err, 'error updating interest');
+        }
+    });
+    res.end();
+});
 
-app.patch('/profile')
+// req.body needs username and update object with property and new value
+app.patch('/profile', (req, res) => {
+    db.updateProfile(req.body.username, req.body.update, (err) => {
+        if (err) {
+            // notify user of error
+            console.error(err, 'error updating profile');
+        }
+    });
+    res.end();
+})
 
 app.listen(PORT, () => {
     console.log(`listening on port ${PORT}`);
