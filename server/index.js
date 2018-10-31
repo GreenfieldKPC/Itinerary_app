@@ -4,6 +4,8 @@ const path = require('path');
 
 const db = require('../database/index.js'); // needs to require towards the database
 const handler = require('../requesthandler/yelp.js'); // this helper get the information from the yelp api
+const util = require('../requesthandler/utility.js');
+
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
