@@ -16,9 +16,21 @@ app.get('/')
 
 app.get('/search')
 
-app.get('/interests')
-
 app.get('/profile')
+
+// query database by username, receive array of interests
+app.get('/interests', (req, res) => {
+    db.getUserInterests(req.query.username, (err, interests) => {
+        if (err) {
+            // notify user of error
+            console.error(err, 'error getting interests');
+            res.send(err);
+        } else {
+            // return array of interests
+            res.send(interests);
+        }
+    });
+});
 
 //req.body needs username, email, password, passwordConf (short for password confirmation)
 app.post('/signup', (req, res) => {

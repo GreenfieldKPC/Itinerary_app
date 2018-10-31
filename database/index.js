@@ -112,8 +112,30 @@ const updateProfile = (username, propObj, cb) => {
     });
 };
 
+const getUserInterests = (username, cb) => {
+    let interests = [];
+    UserProfile.findOne({ username })
+        .exec((err, profile) => {
+            if (err) {
+                console.error(err, 'error getting user interests');
+                cb(err);
+            } else {
+                Object.keys(profile.interests)
+                    .forEach((key) => {
+                        if(profile.interests[key] === true) {
+                            if (key !== '$init') {
+                                interests.push(key);
+                            }
+                        }
+                    });
+            }
+            cb(null, interests);
+        });
+};
+
 
 module.exports.UserProfile = UserProfile;
 module.exports.createUserProfile = createUserProfile;
 module.exports.updateInterests = updateInterests;
 module.exports.updateProfile = updateProfile;
+module.exports.getUserInterests = getUserInterests;
