@@ -2,26 +2,27 @@ const express = require('express');
 const bodyParser = require('body-parser');
 // const path = require('path');
 const db = require('../database/index.js'); // needs to require towards the database
-const handler = require('../requesthandler/'); // this helper get the information from the yelp api
+const handler = require('../requesthandler/yelp.js'); // this helper get the information from the yelp api
+const utl = require('../requesthandler/utility');
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // app.use(express.static(path.join(''))); // path to the front end
 
-app.get('/', (req, res) => {
-// all the user liked preference from the database then sends it to the client
+// app.get('/', (req, res) => {
+// // all the user liked preference from the database then sends it to the client
 
-});
-app.get('/login', (req, res) => {
-  res.render('login');
-});
-app.post('/login', (req, res) => {
+// });
+// app.get('/login', (req, res) => {
+//   res.render('login');
+// });
+// app.post('/login', (req, res) => {
 
-});
-app.get('/signup', function (req, res) {
-  res.render('signup');
-});
+// });
+// app.get('/signup', function (req, res) {
+//   res.render('signup');
+// });
 /*
 endpoints for yelp get request
 https://api.yelp.com/v3/businesses/search

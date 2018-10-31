@@ -1,5 +1,6 @@
 const request = require('request');
 const config = require('../config.js');
+
 const getTopRestaurants = function(callback) {
   const option = {
     url: "https://api.yelp.com/v3/businesses/",
@@ -17,6 +18,6 @@ const getTopRestaurants = function(callback) {
     }
   })
 }
-module.exports  = {
+module.exports = {
   getTopRestaurants
 }
