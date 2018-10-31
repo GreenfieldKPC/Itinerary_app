@@ -28,4 +28,6 @@ dist/
 node_modules/
 bower_components/
 .vscode/
-yelp.api
+config.js
+package-lock.json
+
