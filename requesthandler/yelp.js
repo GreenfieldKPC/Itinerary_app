@@ -5,7 +5,7 @@ const getTopRestaurants = function(callback) {
     url: "https://api.yelp.com/v3/businesses/",
     headers: {
       'User-Agent': 'request',
-      'Authorization': `${config.TOKENs}`,
+      'Authorization': `${config.TOKEN}`,
       'maxResult': 5
     }
   }
