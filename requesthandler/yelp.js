@@ -1,9 +1,9 @@
 const request = require('request');
 const config = require('../config.js');
 
-const getTopRestaurants = function(callback) {
+const getTopRestaurants = function(location, callback) {
   const option = {
-    url: "https://api.yelp.com/v3/businesses/",
+    url: `https://api.yelp.com/v3/businesses/search?location=${location}`,
     headers: {
       'User-Agent': 'request',
       'Authorization': `${config.TOKEN}`,
@@ -12,10 +12,10 @@ const getTopRestaurants = function(callback) {
   }
   request.get(option, (err, res) => {
     if (err) {
-      console.log(err);
-      callback(err, null);
+      console.log(err, "ERROR IN HANDLER");
     } else {
-      return callback(JSON.parse(null, res));
+      //console.log(res, "RESPONSE IN HANDLER")
+      return callback(null, res);
     }
   })
 }
@@ -33,7 +33,7 @@ const getEvent = function (callback) {
       console.log(err);
       callback(err, null);
     } else {
-      return callback(JSON.parse(null, res));
+      return callback(null, res);
     }
   })
 }

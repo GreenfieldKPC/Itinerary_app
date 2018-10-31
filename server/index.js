@@ -16,17 +16,22 @@ app.use(express.static(__dirname + '/../client')); // path to the front end
 //   res.status(200).send(index.js);
 
 // });
-// app.get('/', (req, res) => {
-//   console.log(req.body);
-//   handler.getEvent((err, result) => {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       console.log(result);
-//       res.send(result);
-//     }
-//   });
-// });
+
+app.get('/loc/:locationID', (req, res) => {
+  const location = req.path.slice(5);
+  console.log(location, "LOCATION");
+  handler.getTopRestaurants(location, (err, result) => {
+    if (err) {
+   console.log(err, 'ERROR IN SERVER');
+    } else {
+      console.log(JSON.parse(result.body), 'RESULT IN SERVER');
+    res.send(JSON.stringify(result.body));
+    }
+  })
+});
+
+
+
 // app.get('/login', (req, res) => {
 //   res.render('login');
 // });
