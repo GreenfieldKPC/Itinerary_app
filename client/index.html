@@ -11,8 +11,8 @@
   <main id="app">
     <input type="text" placeholder="Enter location" v-model="location">
     <input type="submit" value="Search" @click="search">
-    <ul> {{message}}
-     <!-- <result v-for="result in results" :business="result"></result> !-->
+    <ul> 
+     <result v-for="result in results" :business="result"></result> 
     </ul>
   </main>
   
