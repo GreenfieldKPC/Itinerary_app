@@ -2,8 +2,9 @@
   "name": "itineraryapp",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server/index.js",
   "scripts": {
+    "start": "node server/index.js",
     "server-dev": "nodemon server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -32,6 +33,20 @@
     "yarn": "^1.10.1"
   },
   "devDependencies": {
+    "babel-core": "^6.1.2",
+    "babel-loader": "^6.1.0",
+    "babel-plugin-transform-runtime": "^6.1.2",
+    "babel-preset-es2015": "^6.1.2",
+    "babel-preset-stage-0": "^6.1.2",
+    "babel-runtime": "^5.8.0",
+    "css-loader": "^0.23.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "style-loader": "^0.13.0",
+    "vue-hot-reload-api": "^1.2.0",
+    "vue-html-loader": "^1.0.0",
+    "vue-loader": "^7.3.0",
+    "webpack": "^1.12.2",
+    "webpack-cli": "^3.1.2",
     "eslint": "^5.8.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
