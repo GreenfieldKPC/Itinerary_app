@@ -32,9 +32,9 @@ const app = new Vue({
     }
   },
   methods: {
-    search() {
+    search(location) {
       console.log(location);
-      fetch(`/loc/houston`)
+      fetch(`/loc/${location}`)
     .then(response => {  
       console.log(response, "RESPONSE IN CLIENT");  
         return response.json()
