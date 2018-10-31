@@ -1,55 +1,44 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-// const path = require('path');
-// const db = require(''); // needs to require towards the database
+const path = require('path');
+const db = require('../database/index');
 
 const app = express();
-app.use(bodyParser.urlencoded({ extended: false }));
+const PORT = 3000;
+
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.use(express.static(path.join(''))); // path to the front end
+app.use(express.static(path.join(__dirname, '/../client')));
 
-// app.get('/', (req, res) => {
-// // all the user liked preference from the database then sends it to the client
-// db.selectAll((err, result) => {
-//   if (err) {
-//     console.log(err);
-//   } else {
-//     res.status(200).send(result); 
-//   }
-// })
-// });
-app.get('/', (req, res) => {
-console.log(req.body);
-res.send('Hello World')
+
+app.get('/')
+
+app.get('/search')
+
+app.get('/interests')
+
+app.get('/profile')
+
+//req.body needs username, email, password, passwordConf
+app.post('/signup', (req, res) => {
+    db.createUserProfile(req.body, (err) => {
+        if (err) {
+            // notify user of error
+            console.error(err, 'error signing up');
+        }
+    });
+    res.end();
 });
-/*
-endpoints for yelp get request
-https://api.yelp.com/v3/businesses/search
-https://api.yelp.com/v3/businesses/{id}
-{ location: req.body.location,  
-  rating: req.body.rating, 
-  hours: req.body.hours, 
-  name: req.body.name, 
-  phone: req.body.name, 
-  id: req.body.id }
 
-https://api.yelp.com/v3/events/{id}
-{ location: req.body.location,
-  start: req.body.time_start,
-  end: req.body.time_end,
-  name: req.body.name,
-  phone: req.body.name,
-  id: req.body.id 
-  latitude: req.body.latitude,
-  longitude: req.body.longitude
-}
+app.patch('/interests')
 
+app.patch('/profile')
 
-
-*/
-
-
-app.listen(process.env.PORT || 3000, () => {
-  console.log('listening on port 3000!');
+app.listen(PORT, () => {
+    console.log(`listening on port ${PORT}`);
 });
+
+
+
+
