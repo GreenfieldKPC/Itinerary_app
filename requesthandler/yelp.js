@@ -21,11 +21,12 @@ const getTopRestaurants = function(location, callback) {
 }
 
 
-const getEvent = function (callback) {
+const getEvent = function (location ,callback) {
   request.get({
-    url: "https://www.eventbriteapi.com/v3/users/me/?token=SESXYS4X3FJ5LHZRWGKQ",
+    url: `https://www.eventbriteapi.com/v3//events/search?location=${location}`,
     headers: {
-      'Authorization': `${config.Event}`
+      'Authorization': `${config.Event}`,
+      'maxResult': 5
     }
 
   }, (err, res) => {
@@ -33,6 +34,7 @@ const getEvent = function (callback) {
       console.log(err);
       callback(err, null);
     } else {
+      
       return callback(null, res);
     }
   })
