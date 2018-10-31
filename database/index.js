@@ -78,23 +78,23 @@ const updateInterests = (updateObj, cb) => {
     // update interest
     setObject["interests." + updateObj.interest] = true;
     // update timestamp
-    // setObject["updated_at"] = Date.now();
+    setObject["updated_at"] = Date.now();
 
-    UserProfile.findOne(query, (err, profile) => {
+    UserProfile.updateOne(query, {$set: setObject},(err) => {
         if (err) {
             console.error(err);
             cb(err, 'error updating interest');
         } else {
-            profile.updated_at = Date.now();
-            let prop = JSON.stringify(Object.keys(setObject)[0]);
-            console.log(Object.keys(profile.interests), 'bool');
-            profile[Object.keys(setObject)[0]] = !profile[Object.keys(setObject)[0]];
-            profile.save((err) => {
-                if (err) {
-                    console.error(err, 'error saving updated interest');
-                    cb(err);
-                }
-            })
+            // profile.updated_at = Date.now();
+            // let prop = Object.keys(setObject)[0];
+            // console.log(Object.keys(profile.interests), 'bool');
+            // profile[Object.keys(setObject)[0]] = !profile[Object.keys(setObject)[0]];
+            // profile.save((err) => {
+            //     if (err) {
+            //         console.error(err, 'error saving updated interest');
+            //         cb(err);
+            //     }
+            // })
         }
     });
 };
