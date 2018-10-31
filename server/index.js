@@ -12,16 +12,27 @@ app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/../client')); // path to the front end
 
-app.get('/', (req, res) => {
-  res.status(200).send(index.js);
+// app.get('/', (req, res) => {
+//   res.status(200).send(index.js);
 
-});
+// });
+// app.get('/', (req, res) => {
+//   console.log(req.body);
+//   handler.getEvent((err, result) => {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log(result);
+//       res.send(result);
+//     }
+//   });
+// });
 // app.get('/login', (req, res) => {
 //   res.render('login');
 // });
-// app.post('/login', (req, res) => {
+// // app.post('/login', (req, res) => {
 
-// });
+// // });
 // app.get('/signup', function (req, res) {
 //   res.render('signup');
 // });

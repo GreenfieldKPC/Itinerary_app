@@ -13,11 +13,34 @@ const getTopRestaurants = function(callback) {
   request.get(option, (err, res) => {
     if (err) {
       console.log(err);
+      callback(err, null);
     } else {
-      return callback(res);
+      return callback(JSON.parse(null, res));
     }
   })
 }
+
+
+const getEvent = function (callback) {
+  request.get({
+    url: "https://www.eventbriteapi.com/v3/users/me/?token=SESXYS4X3FJ5LHZRWGKQ",
+    headers: {
+      'Authorization': `${config.Event}`
+    }
+
+  }, (err, res) => {
+    if (err) {
+      console.log(err);
+      callback(err, null);
+    } else {
+      return callback(JSON.parse(null, res));
+    }
+  })
+}
+
+
 module.exports = {
-  getTopRestaurants
+  getTopRestaurants,
+  getEvent
+
 }
