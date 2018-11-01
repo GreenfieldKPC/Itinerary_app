@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
+const mLAB_URI = require('../config').mLAB_URI;
 
-//replace with url from mLab?
-mongoose.connect('mongodb://localhost/fetcher', { useNewUrlParser: true });
+mongoose.connect(mLAB_URI, { useNewUrlParser: true });
 
 const userProfileSchema = mongoose.Schema({
     email: {
