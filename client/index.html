@@ -14,7 +14,7 @@
     <ul> 
       <!-- maybe limit to 5-10 of each result type -->
      <result v-for="result in results" :business="result"></result>
-     <event v-for="event in events"> {{event}} </event>  
+     <event v-for="event in events" :event="event"></event>  
     </ul>
   </main>
   

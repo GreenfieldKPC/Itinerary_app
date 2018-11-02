@@ -17,14 +17,14 @@ const Result = Vue.component('result', {
   },
 });
 const Events = Vue.component('event', {
-  template: '<li>{{ event.name }} <a :href="calendarURL" target="_blank">Add to Calendar</a></li>',
+  template: '<li>{{ event.name.text }} <a :href="calendarURL" target="_blank">Add to Calendar</a></li>',
   props: ['event'],
   computed: {
     calendarURL() {
-      return `https://www.google.com/calendar/render?action=TEMPLATE&text=${this.name}`;
+      return `https://www.google.com/calendar/render?action=TEMPLATE&text=${this.event.name.text}`
     },
   },
-});
+})
 // MAIN APP COMPONENT
 const app = new Vue({
   el: '#app',
@@ -54,10 +54,13 @@ const app = new Vue({
           console.log(this.results);
         });
       fetch(`/event/${location}`)
-        .then(res => res).then((result) => {
-          console.log(result);
-          this.events = result;
-        });
-    },
-  },
-});
+      .then(res => {
+        return res.json();
+      }).then((result) => {
+        result = JSON.parse(result);
+      
+        this.events = result.events;
+      })
+    }
+  }
+})
