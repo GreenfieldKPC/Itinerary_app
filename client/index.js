@@ -44,6 +44,7 @@ const app = new Vue({
       // array of businesses returned from location query to yelp api
       results: [],
       events: [],
+      toggle: true,
     };
   },
   methods: {
@@ -67,6 +68,7 @@ const app = new Vue({
     add() {
       console.log('click');
       return `https://www.google.com/calendar/render?action=TEMPLATE`;
-    }
+    },
+
   }
 })
