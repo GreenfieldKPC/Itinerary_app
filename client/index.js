@@ -56,6 +56,7 @@ const app = new Vue({
 
       results: [],
       events: [],
+      toggle: true,
     };
   },
 
@@ -97,15 +98,16 @@ const app = new Vue({
       .then(res => {
         return res.json();
       }).then((result) => {
-
-        console.log(result, "RESULT FROM EVENTS IN CLIENT");
-        this.events = result;
+        result = JSON.parse(result);
+        
+        this.events = result.events;
 
       })
     },
     add() {
       console.log('click');
       return `https://www.google.com/calendar/render?action=TEMPLATE`;
-    }
+    },
+
   }
 })

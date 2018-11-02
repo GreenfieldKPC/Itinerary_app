@@ -48,7 +48,7 @@
           <td>{{result.location.display_address[0]}}</td>
           <td>{{result.phone}}</td>
           <td>{{result.rating}}</td>
-          <td>Add to Calander</td>
+          <td @click="add()">Add to Calander</td>
         </tr>
       </tbody>
     </table>
@@ -63,7 +63,8 @@
       <tbody>
         <tr v-for="event in events">
           <td>{{event.name.text}}</td>
-          <td>{{event.description.text}}</td>
+          <button @click="toggle = !toggle">show description</button>
+          <td v-show="toggle">{{event.description.text}}</td>
           <td @click="add()">Add to Calander</td>
         </tr>
       </tbody>
