@@ -29,6 +29,7 @@ const app = new Vue({
     result: Result,
     event: Events,
   },
+  
   data() {
     return {
 
@@ -52,6 +53,12 @@ const app = new Vue({
 
 
   methods: {
+    visitor(){ 
+      return true;
+    },
+    loggedInUser() {
+      return true;
+    },
     login(user, pass) {
       console.log(user, pass);
       fetch('/login', {
@@ -62,11 +69,13 @@ const app = new Vue({
      
     },
     signup(username, email, password, passwordConf) {
-      console.log(user, email, pass, passC);
+      console.log(username, email, password, passwordConf);
       fetch('/signup', {
                 method: 'POST',
                 headers : new Headers(),
-                body:JSON.stringify({username, email, password, passwordConf})
+                body: JSON.stringify({username: username, email: email, password: password, passwordConf: passwordConf}),
+            }).then((response)=>{
+              console.log(response);
             })
      
     },
