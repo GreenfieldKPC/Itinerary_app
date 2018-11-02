@@ -44,13 +44,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="result in results">
-          <td>{{result.name}}</td>
-          <td>{{result.location.display_address[0]}}</td>
-          <td>{{result.phone}}</td>
-          <td>{{result.rating}}</td>
-          <td @click="add()">Add to Calander</td>
-        </tr>
+          <tr><result v-for="result in results" :business="result"></result> </tr>
       </tbody>
     </table>
     <table id="eventTable">
