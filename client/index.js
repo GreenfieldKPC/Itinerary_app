@@ -51,13 +51,13 @@ const app = new Vue({
       }).then(data => {
         const stuff = JSON.parse(data);
         this.results = stuff.businesses
-        console.log(this.results);
+        console.log(this.results, "RESULTS FROM YELP IN CLIENT");
       })
       fetch(`/event/${location}`)
       .then(res => {
         return res;
       }).then((result) => {
-        console.log(result);
+        console.log(result, "RESULT FROM EVENTS IN CLIENT");
         this.events = result;
       })
     }

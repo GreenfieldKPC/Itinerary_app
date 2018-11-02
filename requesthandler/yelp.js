@@ -23,7 +23,7 @@ const getTopRestaurants = function(location, callback) {
 
 const getEvent = function (location ,callback) {
   request.get({
-    url: `https://www.eventbriteapi.com/v3//events/search?location=${location}`,
+    url: `https://www.eventbriteapi.com/v3/events/search/location.latitude=30?location.longitude=90`,
     headers: {
       'Authorization': `${config.Event}`,
       'maxResult': 5

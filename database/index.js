@@ -133,7 +133,12 @@ const getUserInterests = (username, cb) => {
         });
 };
 
+const existingUser = (user, callback) => {
+    UserProfile.find({})
 
+
+}
+module.exports.existingUser = existingUser;
 module.exports.UserProfile = UserProfile;
 module.exports.createUserProfile = createUserProfile;
 module.exports.updateInterests = updateInterests;
