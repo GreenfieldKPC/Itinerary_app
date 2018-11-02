@@ -102,7 +102,6 @@ app.get('/event/:locationId', (req, res) => {
     if (err) {
       console.log(err, 'events');
     } else {
-      console.log(result.body);
       res.send(JSON.stringify(result.body));
     }
   });

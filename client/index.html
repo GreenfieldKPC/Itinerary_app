@@ -13,9 +13,27 @@
     <input type="submit" value="Search" @click="search.call(this, location)">
     <ul> 
       <!-- maybe limit to 5-10 of each result type -->
+      <head><b>Food</b></head>
      <result v-for="result in results" :business="result"></result>
-     <event v-for="event in events" :event="event"></event>  
+     <!-- <head><b>Events</b></head> -->
+     <!-- <event v-for="event in events" :event="event"></event>   -->
     </ul>
+    <table id="eventTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <!-- <th>add calander</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="event in events">
+          <td>{{event.name.text}}</td>
+          <td>{{event.description.text}}</td>
+          <td @click="add()">Add to Calander</td>
+        </tr>
+      </tbody>
+    </table>
   </main>
   
   <script type="text/javascript" src="index.js"></script>
