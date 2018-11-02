@@ -24,6 +24,11 @@ const Events = Vue.component('event', {
       return `https://www.google.com/calendar/render?action=TEMPLATE&text=${this.event.name.text}`
     },
   },
+  methods : {
+    add() {
+      console.log('hello');
+    }
+  }
 })
 // MAIN APP COMPONENT
 const app = new Vue({
@@ -43,15 +48,12 @@ const app = new Vue({
   },
   methods: {
     search(location) {
-      console.log(location);
       fetch(`/loc/${location}`)
         .then((response) => {
-          console.log(response, 'RESPONSE IN CLIENT');
           return response.json();
         }).then((data) => {
           const stuff = JSON.parse(data);
           this.results = stuff.businesses;
-          console.log(this.results);
         });
       fetch(`/event/${location}`)
       .then(res => {
@@ -61,6 +63,10 @@ const app = new Vue({
       
         this.events = result.events;
       })
+    },
+    add() {
+      console.log('click');
+      return `https://www.google.com/calendar/render?action=TEMPLATE`;
     }
   }
 })
