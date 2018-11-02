@@ -1,24 +1,12 @@
-
-
-// var app = new Vue({
-//   el: '#app',
-//   data: {
-//     message: 'Hello Vue!'
-//   }
-// })
-
-// RESULT COMPONENT
-
 const Result = Vue.component('result', {
-  template: '<li>{{ business.name }} <a :href="calendarURL" target="_blank">Add to Calendar</a></li>',
+  template: '<tr><td>{{business.name}} </td> <td> {{business.location.display_address[0]}} </td> <td> {{business.phone}} </td> <td> {{business.rating}} </td>  <a :href="calendarURL" target="_blank"> Add to Calendar </a> </tr> ',
   props: ['business'],
   computed: {
     calendarURL() {
-
-      return `https://www.google.com/calendar/render?action=TEMPLATE&text=${this.business.name}&location=${this.business.location.address1}%2C+${this.business.location.city}%2C+${this.business.location.state}`;
-    },
-  },
-});
+      return `https://www.google.com/calendar/render?action=TEMPLATE&text=${this.business.name}&location=${this.business.location.address1}%2C+${this.business.location.city}%2C+${this.business.location.state}`
+    }
+  }
+})
 
 const Events = Vue.component('event', {
   template: '<li>{{ event.name.text }} <a :href="calendarURL" target="_blank">Add to Calendar</a></li>',
