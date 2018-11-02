@@ -13,7 +13,7 @@
     <input type="submit" value="Search" @click="search.call(this, location)">
     <ul> 
      <result v-for="result in results" :business="result"></result>
-     <event v-for="event in events"> {{event}} </event>  
+     <event v-for="event in events" :event="event"></event>  
     </ul>
   </main>
   
