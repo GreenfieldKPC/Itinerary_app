@@ -13,14 +13,14 @@
   <main id="app">
     <input type="text" placeholder="Enter location" v-model="location">
     <input type="submit" value="Search" @click="search.call(this, location)">
-<div id=logandsign>
-    <div id=login> <a href="/login">
+<div id="loginAndSignUp" v-if="visitor()">
+    <div id="login" v-show="visitor"> <a href="/login">
         <input type="text" placeholder="Enter username" v-model="usernameL">
         <input type="password" placeholder="Enter password" v-model="passwordL">
     <button class="login" value="Login" @click="login.call(this, usernameL, passwordL)"> LOG IN</button>
   </a>
   </div>
-  <div id=signup> <a href="/signin">
+  <div id="signup"v-show="visitor"> <a href="/signup">
       <input type="text" placeholder="Enter username" v-model="username">
       <input type="text" placeholder="Enter email" v-model="email"> </br>
       <input type="password" placeholder="Enter password" v-model="password">
@@ -31,6 +31,7 @@
   <td @click="clickOninterest(interest.clicked)">{{interests}}</td>
 </tr>
 </div>
+</div>
     <ul> 
       <!-- maybe limit to 5-10 of each result type -->
       <!-- <head><b>Food</b></head>
@@ -38,6 +39,7 @@
      <!-- <head><b>Events</b></head> -->
      <!-- <event v-for="event in events" :event="event"></event>   -->
     </ul>
+    <div id="itenerary" v-if="loggedInUser()">
     <table id="foodTable">
       <thead>
         <tr>
@@ -48,13 +50,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="result in results">
-          <td>{{result.name}}</td>
-          <td>{{result.location.display_address[0]}}</td>
-          <td>{{result.phone}}</td>
-          <td>{{result.rating}}</td>
-          <td @click="add()">Add to Calander</td>
-        </tr>
+          <tr><result v-for="result in results" :business="result"></result> </tr>
       </tbody>
     </table>
     <table id="eventTable">
@@ -74,6 +70,7 @@
         </tr>
       </tbody>
     </table>
+  </div>
   </main>
   
   <script type="text/javascript" src="index.js"></script>

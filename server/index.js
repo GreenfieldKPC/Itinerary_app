@@ -26,12 +26,17 @@ app.use(express.static(path.join(__dirname, '/../client'))); // path to the fron
 // add user profile to database
 // req.body needs username, email, password, passwordConf (short for password confirmation)
 app.post('/signup', (req, res) => {
-  db.createUserProfile(req.body, (err) => {
+    req.on('data', (chunk)=>{
+        let userObj = JSON.parse(chunk);
+        db.createUserProfile(userObj, (err) => {
     if (err) {
       // notify user of error
       console.error(err, 'error signing up');
     }
   });
+    })
+   
+
   res.end();
 });
 
@@ -115,12 +120,15 @@ app.post('/login', (req, res) => {
     db.logIn(user, (err, bool)=>{
         if (err) {
             console.log(err);
+            res.send(false)
         } else {
             if (bool) {
                 //create session and redirect
                 util.createSession(req, res, user.username);
+                res.send(true);
             }
         }
+        res.send(false);
     });
 });
 

@@ -1,24 +1,12 @@
-
-
-// var app = new Vue({
-//   el: '#app',
-//   data: {
-//     message: 'Hello Vue!'
-//   }
-// })
-
-// RESULT COMPONENT
-
 const Result = Vue.component('result', {
-  template: '<li>{{ business.name }} <a :href="calendarURL" target="_blank">Add to Calendar</a></li>',
+  template: '<tr><td>{{business.name}} </td> <td> {{business.location.display_address[0]}} </td> <td> {{business.phone}} </td> <td> {{business.rating}} </td>  <a :href="calendarURL" target="_blank"> Add to Calendar </a> </tr> ',
   props: ['business'],
   computed: {
     calendarURL() {
-
-      return `https://www.google.com/calendar/render?action=TEMPLATE&text=${this.business.name}&location=${this.business.location.address1}%2C+${this.business.location.city}%2C+${this.business.location.state}`;
-    },
-  },
-});
+      return `https://www.google.com/calendar/render?action=TEMPLATE&text=${this.business.name}&location=${this.business.location.address1}%2C+${this.business.location.city}%2C+${this.business.location.state}`
+    }
+  }
+})
 
 const Events = Vue.component('event', {
   template: '<li>{{ event.name.text }} <a :href="calendarURL" target="_blank">Add to Calendar</a></li>',
@@ -41,6 +29,7 @@ const app = new Vue({
     result: Result,
     event: Events,
   },
+  
   data() {
     return {
 
@@ -65,6 +54,12 @@ const app = new Vue({
 
 
   methods: {
+    visitor(){ 
+      return true;
+    },
+    loggedInUser() {
+      return true;
+    },
     login(user, pass) {
       console.log(user, pass);
       fetch('/login', {
@@ -74,12 +69,14 @@ const app = new Vue({
             })
      
     },
-    signup(user, email, pass, passC) {
-      console.log(user, email, pass, passC);
+    signup(username, email, password, passwordConf) {
+      console.log(username, email, password, passwordConf);
       fetch('/signup', {
                 method: 'POST',
                 headers : new Headers(),
-                body:JSON.stringify({user, email, pass, passC})
+                body: JSON.stringify({username: username, email: email, password: password, passwordConf: passwordConf}),
+            }).then((response)=>{
+              console.log(response);
             })
      
     },
