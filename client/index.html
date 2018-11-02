@@ -27,9 +27,47 @@
   <button class="signup" value="SignUp" @click="signup.call(this, username, email, password, passConf)"> SIGN UP</button>
 </div>
     <ul> 
-     <result v-for="result in results" :business="result"></result>
-     <event v-for="event in events"> {{event}} </event>  
+      <!-- maybe limit to 5-10 of each result type -->
+      <!-- <head><b>Food</b></head>
+     <result v-for="result in results" :business="result"></result> -->
+     <!-- <head><b>Events</b></head> -->
+     <!-- <event v-for="event in events" :event="event"></event>   -->
     </ul>
+    <table id="foodTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Location</th>
+          <th>Phone #</th>
+          <th>Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="result in results">
+          <td>{{result.name}}</td>
+          <td>{{result.location.display_address[0]}}</td>
+          <td>{{result.phone}}</td>
+          <td>{{result.rating}}</td>
+          <td>Add to Calander</td>
+        </tr>
+      </tbody>
+    </table>
+    <table id="eventTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <!-- <th>add calander</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="event in events">
+          <td>{{event.name.text}}</td>
+          <td>{{event.description.text}}</td>
+          <td @click="add()">Add to Calander</td>
+        </tr>
+      </tbody>
+    </table>
   </main>
   
   <script type="text/javascript" src="index.js"></script>
