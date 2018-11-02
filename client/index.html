@@ -12,6 +12,7 @@
     <input type="text" placeholder="Enter location" v-model="location">
     <input type="submit" value="Search" @click="search.call(this, location)">
     <ul> 
+      <!-- maybe limit to 5-10 of each result type -->
      <result v-for="result in results" :business="result"></result>
      <event v-for="event in events" :event="event"></event>  
     </ul>
