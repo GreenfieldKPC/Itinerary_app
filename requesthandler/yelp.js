@@ -22,12 +22,15 @@ const getTopRestaurants = function(location, callback) {
 
 
 const getEvent = function (location ,callback) {
+  let cap = location[0].toUpperCase() + location.substr(1);
   request.get({
-    url: `https://www.eventbriteapi.com/v3//events/search?location=${location}`,
+    url: `https://www.eventbriteapi.com/v3//events/search/?location.address=${cap}&location.within=25km`,
     headers: {
       'Authorization': `${config.Event}`,
-      'maxResult': 5
-    }
+      "verify" : true,
+      "maxResult": 20,
+    },
+    
 
   }, (err, res) => {
     if (err) {
@@ -38,6 +41,7 @@ const getEvent = function (location ,callback) {
       return callback(null, res);
     }
   })
+
 }
 
 

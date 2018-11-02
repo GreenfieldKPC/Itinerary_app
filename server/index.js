@@ -81,26 +81,26 @@ app.patch('/profile', (req, res) => {
 
 app.get('/loc/:locationID', (req, res) => {
   const location = req.path.slice(5);
-  console.log(location, "LOCATION");
+//   console.log(location, "LOCATION");
   handler.getTopRestaurants(location, (err, result) => {
     if (err) {
    console.log(err, 'ERROR IN SERVER');
     } else {
-      console.log(JSON.parse(result.body), 'RESULT IN SERVER');
+    //   console.log(JSON.parse(result.body), 'RESULT IN SERVER');
     res.send(JSON.stringify(result.body));
     }
   })
 });
 
 app.get('/event/:locationId', (req, res) => {
-  console.log(req.body);
+  
   const location = req.path.slice(5);
   handler.getEvent(location, (err, result) => {
     if (err) {
       console.log(err, 'events');
     } else {
-      console.log(result);
-      res.json(result);
+      console.log(result.body);
+      res.send(JSON.stringify(result.body));
     }
   })
 });
