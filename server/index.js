@@ -84,18 +84,19 @@ app.patch('/profile', (req, res) => {
 
 app.get('/loc/:locationID', (req, res) => {
   const location = req.path.slice(5);
-//   console.log(location, "LOCATION");
+
   handler.getTopRestaurants(location, (err, result) => {
     if (err) {
       console.log(err, 'ERROR IN SERVER');
     } else {
-    //   console.log(JSON.parse(result.body), 'RESULT IN SERVER');
+
     res.send(JSON.stringify(result.body));
     }
   });
 });
 
 app.get('/event/:locationId', (req, res) => {
+
   
   const location = req.path.slice(5);
   handler.getEvent(location, (err, result) => {
@@ -103,16 +104,30 @@ app.get('/event/:locationId', (req, res) => {
       console.log(err, 'events');
     } else {
       res.send(JSON.stringify(result.body));
+
     }
   });
+});
+
+app.post('/login', (req, res) => {
+    const user = req.body
+
+    db.logIn(user, (err, bool)=>{
+        if (err) {
+            console.log(err);
+        } else {
+            if (bool) {
+                //create session and redirect
+                util.createSession(req, res, user.username);
+            }
+        }
+    });
 });
 
 // app.get('/login', (req, res) => {
 //   res.render('login');
 // });
-// // app.post('/login', (req, res) => {
 
-// // });
 // app.get('/signup', function (req, res) {
 //   res.render('signup');
 // });
