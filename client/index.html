@@ -6,11 +6,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
+
 <body>
   <main id="app">
     <input type="text" placeholder="Enter location" v-model="location">
     <input type="submit" value="Search" @click="search.call(this, location)">
+<div id=logandsign>
+    <div id=login>
+        <input type="text" placeholder="Enter username" v-model="usernameL">
+        <input type="password" placeholder="Enter password" v-model="passwordL">
+    <button class="login" value="Login" @click="login.call(this, usernameL, passwordL)"> LOG IN</button>
+  </div>
+  <div id=signup>
+      <input type="text" placeholder="Enter username" v-model="username">
+      <input type="text" placeholder="Enter email" v-model="email"> </br>
+      <input type="password" placeholder="Enter password" v-model="password">
+      <input type="password" placeholder="Confirm password" v-model="passConf">
+  <button class="signup" value="SignUp" @click="signup.call(this, username, email, password, passConf)"> SIGN UP</button>
+</div>
     <ul> 
      <result v-for="result in results" :business="result"></result>
      <event v-for="event in events"> {{event}} </event>  

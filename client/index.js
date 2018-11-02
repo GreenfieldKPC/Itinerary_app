@@ -1,11 +1,3 @@
-
-// var app = new Vue({
-//   el: '#app',
-//   data: {
-//     message: 'Hello Vue!'
-//   }
-// })
-
 //RESULT COMPONENT
 const Result = Vue.component('result', {
   template: '<li>{{ business.name }} <a :href="calendarURL" target="_blank">Add to Calendar</a></li>',
@@ -16,6 +8,7 @@ const Result = Vue.component('result', {
     }
   }
 })
+//EVENT COMPONENT
 const Events = Vue.component('event', {
   template: '<li>{{ event.name }} <a :href="calendarURL" target="_blank">Add to Calendar</a></li>',
   props: ['event'],
@@ -36,12 +29,40 @@ const app = new Vue({
     return {
       //updates from v-model text input search
       location: "",
+      usernameL: "",
+      passwordL: "",
+      username: "",
+      email: "",
+      password: "",
+      passConf: "",
       //array of businesses returned from location query to yelp api
       results: [],
       events: []
     }
   },
+
+
+
+
   methods: {
+    login(user, pass) {
+      console.log(user, pass);
+      fetch('/login', {
+                method: 'POST',
+                headers : new Headers(),
+                body:JSON.stringify({user, pass})
+            })
+     
+    },
+    signup(user, email, pass, passC) {
+      console.log(user, email, pass, passC);
+      fetch('/signup', {
+                method: 'POST',
+                headers : new Headers(),
+                body:JSON.stringify({user, email, pass, passC})
+            })
+     
+    },
     search(location) {
       console.log(location);
       fetch(`/loc/${location}`)

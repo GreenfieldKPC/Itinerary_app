@@ -108,7 +108,17 @@ app.get('/event/:locationId', (req, res) => {
 
 app.post('/login', (req, res) => {
     const user = req.body
-    
+
+    db.logIn(user, (err, bool)=>{
+        if (err) {
+            console.log(err);
+        } else {
+            if (bool) {
+                //create session and redirect
+                util.createSession(req, res, user.username);
+            }
+        }
+    });
 });
 
 // app.get('/login', (req, res) => {

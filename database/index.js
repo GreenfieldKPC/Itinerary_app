@@ -133,12 +133,27 @@ const getUserInterests = (username, cb) => {
         });
 };
 
-const existingUser = (user, callback) => {
-    UserProfile.find({})
-
-
+const logIn = (user, callback) => {
+    const username = user.username;
+    const password = user.password;
+    UserProfile.find({username: username}, (err, docs) => {
+        if (err) {
+            callback(err, false);
+            console.log(err, 'ERROR IN DATABASE LOGIN')
+        } else {
+            if (!docs.length) {
+                callback(null, false);
+            } else {
+                if (docs[0].password === password) {
+                    callback(null, true)
+                } else {
+                    callback(null, false);
+                }
+            }   
+        }     
+    })
 }
-module.exports.existingUser = existingUser;
+module.exports.logIn = logIn;
 module.exports.UserProfile = UserProfile;
 module.exports.createUserProfile = createUserProfile;
 module.exports.updateInterests = updateInterests;
