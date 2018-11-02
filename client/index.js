@@ -42,10 +42,11 @@ const app = new Vue({
       password: "",
       passConf: "",
       //array of businesses returned from location query to yelp api
-
+      interests: ["Business", "education", "performing and arts", "sports", "film and media", "community and culture", "charity and causes", "travel and outdoor", "science and technology", "health and wellness", "fashion", "seasonal", "regional", "government", "home and lifestyle", "other"],
       results: [],
       events: [],
       toggle: true,
+      usersInterest: [],
     };
   },
 
@@ -105,6 +106,15 @@ const app = new Vue({
       console.log('click');
       return `https://www.google.com/calendar/render?action=TEMPLATE`;
     },
+    clickOninterest(clicked) {
+      clicked = !clicked;
+
+    },
+    selected: function (e) {
+      // //$(e.currentTarget).css('background', '#41c69e')
+      // 'selected' = true;
+      console.log(e);
+    }
 
   }
 })
