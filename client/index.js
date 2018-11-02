@@ -46,19 +46,20 @@ const app = new Vue({
       console.log(location);
       fetch(`/loc/${location}`)
     .then(response => {  
-      console.log(response, "RESPONSE IN CLIENT");  
+      // console.log(response, "RESPONSE IN CLIENT");  
         return response.json()
       }).then(data => {
         const stuff = JSON.parse(data);
         this.results = stuff.businesses
-        console.log(this.results);
+        // console.log(this.results);
       })
       fetch(`/event/${location}`)
       .then(res => {
-        return res;
+        return res.json();
       }).then((result) => {
+        result = JSON.parse(result);
         console.log(result);
-        this.events = result;
+        this.events = result.pagination.events;
       })
     }
   }
