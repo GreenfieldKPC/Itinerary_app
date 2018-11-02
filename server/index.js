@@ -124,9 +124,9 @@ app.post('/login', (req, res) => {
     });
 });
 
-// app.get('/login', (req, res) => {
-//   res.render('login');
-// });
+app.get('/login', (req, res) => {
+  res.render('login');
+});
 
 // app.get('/signup', function (req, res) {
 //   res.render('signup');
