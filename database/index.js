@@ -42,6 +42,7 @@ const UserProfile = mongoose.model('UserProfile', userProfileSchema);
 // accepts object with user's properties
 // creates new profile and saves to database
 const createUserProfile = (userObj, cb) => {
+    console.log(userObj, 'USER OBJ IN DATABASE');
   // check for unique username and email
   // alert user if either is already taken
   const newUser = new UserProfile({
