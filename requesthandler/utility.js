@@ -1,6 +1,6 @@
 const request = require('request');
 
-const loggedIn = function(req, res) {
+const loggedIn = function (req, res) {
   return req.session ? !!req.session.user : false;
 };
 const checkUser = function (req, res, next) {
@@ -11,7 +11,7 @@ const checkUser = function (req, res, next) {
   }
 };
 const createSession = function (req, res, newUser) {
-  return req.session.regenerate(function () {
+  return req.session.regenerate(() => {
     req.session.user = newUser;
     res.redirect('/');
   });
@@ -21,3 +21,4 @@ module.exports = {
   loggedIn,
   createSession,
 }
+;
