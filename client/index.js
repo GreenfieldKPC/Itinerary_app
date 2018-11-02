@@ -61,12 +61,12 @@ const app = new Vue({
             })
      
     },
-    signup(user, email, pass, passC) {
+    signup(username, email, password, passwordConf) {
       console.log(user, email, pass, passC);
       fetch('/signup', {
                 method: 'POST',
                 headers : new Headers(),
-                body:JSON.stringify({user, email, pass, passC})
+                body:JSON.stringify({username, email, password, passwordConf})
             })
      
     },
