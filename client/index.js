@@ -52,9 +52,13 @@ const Interests = Vue.component('interest', {
   props: ['interest'],
   methods: {
     addToSearch() {
+      // change color to green
+      // add interest to api call to eventbrite
 
     },
     updateUserInterests() {
+      // change button color to green
+      // add interest to user profile if user is logged in
 
     },
   },
@@ -182,8 +186,8 @@ const app = new Vue({
         method: 'POST',
         headers: new Headers(),
         body: JSON.stringify({
-        username, email, password, passwordConf 
-      }),
+          username, email, password, passwordConf,
+        }),
       }).then((response) => {
         console.log(response);
       });
@@ -199,12 +203,12 @@ const app = new Vue({
           this.results = stuff.businesses;
           console.log(this.results, 'RESULTS FROM YELP IN CLIENT');
         });
-
+      
       fetch(`/event/${location}`)
         .then((res) => res.json()).then((result) => {
           result = JSON.parse(result);
-
-          this.events = result.events;
+          // limit number of results
+          this.events = result.events.slice(0, 5);
         });
     },
     add() {
