@@ -19,7 +19,8 @@ const Events = Vue.component('event', {
   template: `<div class="card">
               <div class="card-header">
                 <a class="card-link" data-toggle="collapse" data-parent="#card-317479" href="#card-element-356590">
-                  {{ event.name.text + ' start time:' + event.start.local + ' end time:' + event.end.local}}
+                <h4>{{ event.name.text }}</h4>
+                  {{' start time:' + event.start.local + ' end time:' + event.end.local}}
                 </a>
               </div>
               <div id="card-element-356590" class="collapse">
