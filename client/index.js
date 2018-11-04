@@ -10,10 +10,10 @@ const Result = Vue.component('result', {
   props: ['business'],
   computed: {
     calendarURL() {
-      return `https://www.google.com/calendar/render?action=TEMPLATE&text=${this.business.name}&location=${this.business.location.address1}%2C+${this.business.location.city}%2C+${this.business.location.state}`
-    }
-  }
-})
+      return `https://www.google.com/calendar/render?action=TEMPLATE&text=${this.business.name}&location=${this.business.location.address1}%2C+${this.business.location.city}%2C+${this.business.location.state}`;
+    },
+  },
+});
 
 const Events = Vue.component('event', {
   template: `<div class="card">
@@ -38,33 +38,50 @@ const Events = Vue.component('event', {
       return `https://www.google.com/calendar/render?action=TEMPLATE&text=${this.event.name.text}`;
     },
   },
-  methods : {
+  methods: {
     add() {
       console.log('hello');
-    }
-  }
-})
+    },
+  },
+});
+
+const Interests = Vue.component('interest', {
+  template: `<div class="top-buffer">
+  <button type="button" class="btn btn-block btn-warning">{{ interest }}</button>
+  </div>`,
+  props: ['interest'],
+  methods: {
+    addToSearch() {
+
+    },
+    updateUserInterests() {
+
+    },
+  },
+});
+
 // MAIN APP COMPONENT
 const app = new Vue({
   el: '#app',
   components: {
     result: Result,
     event: Events,
+    interest: Interests,
   },
-  
+
   data() {
     return {
 
-      //updates from v-model text input search
-      location: "",
-      usernameL: "",
-      passwordL: "",
-      username: "",
-      email: "",
-      password: "",
-      passConf: "",
-      //array of businesses returned from location query to yelp api
-      interests: ["Business", "education", "performing and arts", "sports", "film and media", "community and culture", "charity and causes", "travel and outdoor", "science and technology", "health and wellness", "fashion", "seasonal", "regional", "government", "home and lifestyle", "other"],
+      // updates from v-model text input search
+      location: '',
+      usernameL: '',
+      passwordL: '',
+      username: '',
+      email: '',
+      password: '',
+      passConf: '',
+      // array of businesses returned from location query to yelp api
+      interests: ['business', 'education', 'performing and arts', 'sports', 'film and media', 'community and culture', 'charity and causes', 'travel and outdoor', 'science and technology', 'health and wellness', 'fashion', 'seasonal', 'regional', 'government', 'home and lifestyle', 'other'],
       results: [],
 
       events: [{
@@ -135,8 +152,8 @@ const app = new Vue({
           edge_color_set: true,
         },
       }],
-//       using a sample event, uncomment empty event array for api calls
-//       events: [],
+      //       using a sample event, uncomment empty event array for api calls
+      //       events: [],
       toggle: true,
       usersInterest: [],
 
@@ -144,10 +161,8 @@ const app = new Vue({
   },
 
 
-
-
   methods: {
-    visitor(){ 
+    visitor() {
       return true;
     },
     loggedInUser() {
@@ -156,58 +171,54 @@ const app = new Vue({
     login(user, pass) {
       console.log(user, pass);
       fetch('/login', {
-                method: 'POST',
-                headers : new Headers(),
-                body:JSON.stringify({user, pass})
-            })
-     
+        method: 'POST',
+        headers: new Headers(),
+        body: JSON.stringify({ user, pass }),
+      });
     },
     signup(username, email, password, passwordConf) {
       console.log(username, email, password, passwordConf);
       fetch('/signup', {
-                method: 'POST',
-                headers : new Headers(),
-                body: JSON.stringify({username: username, email: email, password: password, passwordConf: passwordConf}),
-            }).then((response)=>{
-              console.log(response);
-            })
-     
+        method: 'POST',
+        headers: new Headers(),
+        body: JSON.stringify({
+        username, email, password, passwordConf 
+      }),
+      }).then((response) => {
+        console.log(response);
+      });
     },
     search(location) {
       fetch(`/loc/${location}`)
 
-    .then(response => {  
-      console.log(response, "RESPONSE IN CLIENT");  
-        return response.json()
-      }).then(data => {
-        const stuff = JSON.parse(data);
-        this.results = stuff.businesses
-        console.log(this.results, "RESULTS FROM YELP IN CLIENT");
-      })
+        .then((response) => {
+          console.log(response, 'RESPONSE IN CLIENT');
+          return response.json();
+        }).then((data) => {
+          const stuff = JSON.parse(data);
+          this.results = stuff.businesses;
+          console.log(this.results, 'RESULTS FROM YELP IN CLIENT');
+        });
 
       fetch(`/event/${location}`)
-      .then(res => {
-        return res.json();
-      }).then((result) => {
-        result = JSON.parse(result);
-        
-        this.events = result.events;
+        .then((res) => res.json()).then((result) => {
+          result = JSON.parse(result);
 
-      })
+          this.events = result.events;
+        });
     },
     add() {
       console.log('click');
-      return `https://www.google.com/calendar/render?action=TEMPLATE`;
+      return 'https://www.google.com/calendar/render?action=TEMPLATE';
     },
     clickOninterest(clicked) {
       clicked = !clicked;
-
     },
-    selected: function (e) {
+    selected (e) {
       // //$(e.currentTarget).css('background', '#41c69e')
       // 'selected' = true;
       console.log(e);
-    }
+    },
 
-  }
-})
+  },
+});

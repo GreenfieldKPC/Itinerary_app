@@ -69,7 +69,7 @@
         <span></span>
         <span></span>
       </button>
-      <div>
+    </div>
 
   <div class="container-fluid">
     <div class="row">
@@ -81,8 +81,8 @@
         </div>
         
         <div class="location-input">
-        <input type="text" placeholder="Enter location" v-model="location">
-        <input type="submit" value="Search" @click="search.call(this, location)">
+          <input type="text" placeholder="Enter location" @keyup.enter="search.call(this, location)" v-model="location">
+          <input type="submit" value="Search" @click="search.call(this, location)">
         </div>
 
         <!-- side scrollspy for yelp results -->
@@ -93,10 +93,19 @@
             <result class="col-xs-4" v-for="result in results" :business="result"></result>
           </div>
         </div>
+        <div class="container-fluid interests">
+          <div class="row text-center top-buffer">
+            <interest class="col-md-3"
+            v-for="interest in interests" :interest="interest"
+            @click="clickOninterest(interest.clicked)"></interest>
+          </div>
+        </div>
         <!-- collapse for event results -->
-        <h3>Click event for details</h3>
-        <div class="event-results"id="card-317479">
-          <event v-for="event in events" :event="event"></event>
+        <div class="container event-results">
+          <h3>Click event for details</h3>
+          <div class="event-results"id="card-317479">
+            <event v-for="event in events" :event="event"></event>
+          </div>
         </div>
       </div>
     </div>
