@@ -10,9 +10,12 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <!-- App name goes in title tag -->
   <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
+
 <body>
   <main id="app">
+
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
@@ -42,6 +45,61 @@
         </div>
       </div>
     </div>
+
+    <input type="text" placeholder="Enter location" v-model="location">
+    <input type="submit" value="Search" @click="search.call(this, location)">
+<div id="loginAndSignUp" v-if="visitor()">
+    <div id="login" v-show="visitor"> <a href="/login">
+        <input type="text" placeholder="Enter username" v-model="usernameL">
+        <input type="password" placeholder="Enter password" v-model="passwordL">
+    <button class="login" value="Login" @click="login.call(this, usernameL, passwordL)"> LOG IN</button>
+  </a>
+  </div>
+  <div id="signup"v-show="visitor"> <a href="/signup">
+      <input type="text" placeholder="Enter username" v-model="username">
+      <input type="text" placeholder="Enter email" v-model="email"> </br>
+      <input type="password" placeholder="Enter password" v-model="password">
+      <input type="password" placeholder="Confirm password" v-model="passConf">
+  <button class="signup" value="SignUp" @click="signup.call(this, username, email, password, passConf)"> SIGN UP</button>
+</a>
+<tr v-for="interest in interests">
+  <td @click="clickOninterest(interest.clicked)">{{interests}}</td>
+</tr>
+</div>
+</div>
+   
+    <div id="itenerary" v-if="loggedInUser()">
+    <table id="foodTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Location</th>
+          <th>Phone #</th>
+          <th>Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr><result v-for="result in results" :business="result"></result> </tr>
+      </tbody>
+    </table>
+    <table id="eventTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <!-- <th>add calander</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="event in events">
+          <td @click="toggle = !toggle">{{event.name.text}}</td>
+          <!-- <button @click="toggle = !toggle">show description</button> -->
+          <td v-show="toggle">{{event.description.text}}</td>
+          <td @click="add()">Add to Calander</td>
+        </tr>
+      </tbody>
+    </table>
+
   </div>
   </main>
   

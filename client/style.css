@@ -77,4 +77,14 @@ img {
   display: inline-block;
   float: none;
   margin: 5px;
+
+#logandsign {
+  float: right;
+}
+
+td {
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+
 }
