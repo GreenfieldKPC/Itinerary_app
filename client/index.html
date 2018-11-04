@@ -1,23 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- App name goes in title tag -->
   <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
+
 <body>
-  <main id="app">
+  <main id="app" class="wrapper">
+    <!-- Sidebar -->
+    <!-- Gotta change this to dropdown instead of sidebar :-/ -->
+    <!-- <nav id="sidebar">
+      <div class="sidebar-header">
+        <h3>Navbar</h3>
+      </div>
+    
+      <ul class="list-unstyled components">
+        <p>Views</p>
+        <li class="active">
+          <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+          <ul class="collapse list-unstyled" id="homeSubmenu">
+            <li>
+              <a href="#">Home</a>
+            </li>
+            <li>
+              <a href="#">Profile</a>
+            </li>
+            <li>
+              <a href="#">Interests</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">login</a>
+        </li>
+        <li>
+          <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+          <ul class="collapse list-unstyled" id="pageSubmenu">
+            <li>
+              <a href="#">Page 1</a>
+            </li>
+            <li>
+              <a href="#">Page 2</a>
+            </li>
+            <li>
+              <a href="#">Page 3</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">Calender</a>
+        </li>
+        <li>
+          <a href="#">Interests</a>
+        </li>
+      </ul>
+    </nav> -->
+    <div id="content">
+      <button type="button" id="sidebarCollapse" class="navbar-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="page-header">
+          <h1>
+            What's The Name Of Our App? <small>Itinerary builder</small>
+          </h1>
+        </div>
+        
+        <div class="location-input">
+        <input type="text" placeholder="Enter location" v-model="location">
+        <input type="submit" value="Search" @click="search.call(this, location)">
+        </div>
+
+        <!-- side scrollspy for yelp results -->
+        <!-- maybe limit to 5-10 of each result type -->
+        <div class="container yelp-results">
+          <div class="row text-center">
+            <!-- list of results -->
+            <result class="col-xs-4" v-for="result in results" :business="result"></result>
+          </div>
+        </div>
+        <!-- collapse for event results -->
+        <h3>Click event for details</h3>
+        <div class="event-results"id="card-317479">
+          <event v-for="event in events" :event="event"></event>
+        </div>
+      </div>
+    </div>
+
     <input type="text" placeholder="Enter location" v-model="location">
     <input type="submit" value="Search" @click="search.call(this, location)">
-    <ul> 
-      <!-- maybe limit to 5-10 of each result type -->
-     <result v-for="result in results" :business="result"></result>
-     <event v-for="event in events"> {{event}} </event>  
-    </ul>
+<div id="loginAndSignUp" v-if="visitor()">
+    <div id="login" v-show="visitor"> <a href="/login">
+        <input type="text" placeholder="Enter username" v-model="usernameL">
+        <input type="password" placeholder="Enter password" v-model="passwordL">
+    <button class="login" value="Login" @click="login.call(this, usernameL, passwordL)"> LOG IN</button>
+  </a>
+  </div>
+  <div id="signup"v-show="visitor"> <a href="/signup">
+      <input type="text" placeholder="Enter username" v-model="username">
+      <input type="text" placeholder="Enter email" v-model="email"> </br>
+      <input type="password" placeholder="Enter password" v-model="password">
+      <input type="password" placeholder="Confirm password" v-model="passConf">
+  <button class="signup" value="SignUp" @click="signup.call(this, username, email, password, passConf)"> SIGN UP</button>
+</a>
+<tr v-for="interest in interests">
+  <td @click="clickOninterest(interest.clicked)">{{interests}}</td>
+</tr>
+</div>
+</div>
+   
+    <div id="itenerary" v-if="loggedInUser()">
+    <table id="foodTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Location</th>
+          <th>Phone #</th>
+          <th>Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+          <!-- <tr><result v-for="result in results" :business="result"></result> </tr> -->
+      </tbody>
+    </table>
+    <table id="eventTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <!-- <th>add calander</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <!-- <tr v-for="event in events">
+          <td @click="toggle = !toggle">{{event.name.text}}</td> -->
+          <!-- <button @click="toggle = !toggle">show description</button> -->
+          <!-- <td v-show="toggle">{{event.description.text}}</td>
+          <td @click="add()">Add to Calander</td>
+        </tr> -->
+      </tbody>
+    </table>
+
+  </div>
   </main>
   
   <script type="text/javascript" src="index.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+    <script>
+      $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+        $(this).toggleClass('active');
+      });
+    </script>
 </body>
 </html>
