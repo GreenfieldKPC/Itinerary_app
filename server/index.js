@@ -19,8 +19,28 @@ app.use(express.static(path.join(__dirname, '/../client'))); // path to the fron
 
 // endpoints for views
 // app.get('/')
-// app.get('/search')
-// app.get('/profile')
+// app.get('/', (req, res) => {
+//   res.status(200).send(index.js);
+// });
+
+// homepage is search view
+app.get('/search', (req, res) => {
+
+});
+
+// profile view for user to see and update info
+app.get('/profile', (req, res) => {
+
+});
+
+// login/signup page routes to either form
+// app.get('/login', (req, res) => {
+//   res.render('login');
+// });
+
+// app.get('/signup', function (req, res) {
+//   res.render('signup');
+// });
 
 
 // add user profile to database
@@ -79,13 +99,14 @@ app.patch('/profile', (req, res) => {
   res.end();
 });
 
+// log in user
+// app.post('/login', (req, res) => {
+
+// });
+
 // endpoint for deleting account
 // app.delete('/delete')
 
-// app.get('/', (req, res) => {
-//   res.status(200).send(index.js);
-
-// });
 
 app.get('/loc/:locationID', (req, res) => {
   const location = req.path.slice(5);

@@ -1,16 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- App name goes in title tag -->
   <title>Document</title>
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
   <main id="app">
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="page-header">
+          <h1>
+            What's The Name Of Our App? <small>Itinerary builder</small>
+          </h1>
+        </div>
+        
+        <div class="location-input">
+        <input type="text" placeholder="Enter location" v-model="location">
+        <input type="submit" value="Search" @click="search.call(this, location)">
+        </div>
+
+        <!-- side scrollspy for yelp results -->
+        <!-- maybe limit to 5-10 of each result type -->
+        <div class="container yelp-results">
+          <div class="row text-center">
+            <!-- list of results -->
+            <result class="col-xs-4" v-for="result in results" :business="result"></result>
+          </div>
+        </div>
+        <!-- collapse for event results -->
+        <div class="event-results"id="card-317479">
+          <event v-for="event in events" :event="event"> {{event}} </event>
+        </div>
+      </div>
+    </div>
+
     <input type="text" placeholder="Enter location" v-model="location">
     <input type="submit" value="Search" @click="search.call(this, location)">
 <div id="loginAndSignUp" v-if="visitor()">
@@ -32,13 +66,7 @@
 </tr>
 </div>
 </div>
-    <ul> 
-      <!-- maybe limit to 5-10 of each result type -->
-      <!-- <head><b>Food</b></head>
-     <result v-for="result in results" :business="result"></result> -->
-     <!-- <head><b>Events</b></head> -->
-     <!-- <event v-for="event in events" :event="event"></event>   -->
-    </ul>
+   
     <div id="itenerary" v-if="loggedInUser()">
     <table id="foodTable">
       <thead>
@@ -70,9 +98,16 @@
         </tr>
       </tbody>
     </table>
+
   </div>
   </main>
   
   <script type="text/javascript" src="index.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
 </body>
 </html>
