@@ -58,7 +58,7 @@ const UserProfile = mongoose.model('UserProfile', userProfileSchema);
 // accepts object with user's properties
 // creates new profile and saves to database
 const createUserProfile = (userObj, cb) => {
-    console.log(userObj, 'USER OBJ IN DATABASE');
+  console.log(userObj, 'USER OBJ IN DATABASE');
   // check for unique username and email
   // alert user if either is already taken
   const newUser = new UserProfile({
@@ -107,7 +107,7 @@ const updateInterests = (updateObj, cb) => {
   const query = { username: updateObj.username };
   const setObject = {};
   // update interest
-  setObject['interests.' + updateObj.interest] = true;
+  setObject[`interests.${updateObj.interest}`] = true;
   // update timestamp
   setObject.updated_at = Date.now();
 
@@ -165,25 +165,21 @@ const getUserInterests = (username, cb) => {
 };
 
 const logIn = (user, callback) => {
-    const username = user.username;
-    const password = user.password;
-    UserProfile.find({username: username}, (err, docs) => {
-        if (err) {
-            callback(err, false);
-            console.log(err, 'ERROR IN DATABASE LOGIN')
-        } else {
-            if (!docs.length) {
-                callback(null, false);
-            } else {
-                if (docs[0].password === password) {
-                    callback(null, true)
-                } else {
-                    callback(null, false);
-                }
-            }   
-        }     
-    })
-}
+  const username = user.username;
+  const password = user.password;
+  UserProfile.find({ username }, (err, docs) => {
+    if (err) {
+      callback(err, false);
+      console.log(err, 'ERROR IN DATABASE LOGIN');
+    } else if (!docs.length) {
+      callback(null, false);
+    } else if (docs[0].password === password) {
+      callback(null, true);
+    } else {
+      callback(null, false);
+    }
+  });
+};
 module.exports.logIn = logIn;
 module.exports.UserProfile = UserProfile;
 module.exports.createUserProfile = createUserProfile;

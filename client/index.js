@@ -44,12 +44,29 @@ const Events = Vue.component('event', {
     },
   },
 });
+
+const Interests = Vue.component('interest', {
+  template: `<div class="top-buffer">
+  <button type="button" class="btn btn-block btn-warning">{{ interest }}</button>
+  </div>`,
+  props: ['interest'],
+  methods: {
+    addToSearch() {
+
+    },
+    updateUserInterests() {
+
+    },
+  },
+});
+
 // MAIN APP COMPONENT
 const app = new Vue({
   el: '#app',
   components: {
     result: Result,
     event: Events,
+    interest: Interests,
   },
 
   data() {
@@ -64,7 +81,7 @@ const app = new Vue({
       password: '',
       passConf: '',
       // array of businesses returned from location query to yelp api
-      interests: ['Business', 'education', 'performing and arts', 'sports', 'film and media', 'community and culture', 'charity and causes', 'travel and outdoor', 'science and technology', 'health and wellness', 'fashion', 'seasonal', 'regional', 'government', 'home and lifestyle', 'other'],
+      interests: ['business', 'education', 'performing and arts', 'sports', 'film and media', 'community and culture', 'charity and causes', 'travel and outdoor', 'science and technology', 'health and wellness', 'fashion', 'seasonal', 'regional', 'government', 'home and lifestyle', 'other'],
       results: [],
 
       events: [{
@@ -135,8 +152,8 @@ const app = new Vue({
           edge_color_set: true,
         },
       }],
-//       using a sample event, uncomment empty event array for api calls
-//       events: [],
+      //       using a sample event, uncomment empty event array for api calls
+      //       events: [],
       toggle: true,
       usersInterest: [],
 
@@ -165,8 +182,8 @@ const app = new Vue({
         method: 'POST',
         headers: new Headers(),
         body: JSON.stringify({
-          username, email, password, passwordConf,
-        }),
+        username, email, password, passwordConf 
+      }),
       }).then((response) => {
         console.log(response);
       });
@@ -197,7 +214,7 @@ const app = new Vue({
     clickOninterest(clicked) {
       clicked = !clicked;
     },
-    selected(e) {
+    selected (e) {
       // //$(e.currentTarget).css('background', '#41c69e')
       // 'selected' = true;
       console.log(e);

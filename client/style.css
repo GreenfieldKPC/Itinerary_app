@@ -44,6 +44,65 @@ body {
 		background-position: 0% 50%
 	}
 }
+
+main {
+    width: 80vw;
+    margin: auto;
+}
+img {
+    height: 300px;
+    width: 350px;
+}
+.btn-warning {
+    color: rgb(114, 81, 129);
+    background: rgb(240, 211, 85);
+    border: 1px solid rgba(0,0,0,0.21);
+    border-bottom-color: rgba(0,0,0,0.34);
+    text-shadow:0 1px 0 rgba(0,0,0,0.15);
+    box-shadow: 2px 6px 0px rgb(170, 146, 58); 
+    border-radius: 10px;
+    margin: 9px;
+    padding: 20px 10px; 
+    font-size: 22px;
+}
+.btn-warning:active {
+    box-shadow: 0 0 #ff4c4b; 
+    background-color: #D6BB59;
+    top: 4px;	
+    border-color: rgba(0,0,0,0.34) rgba(0,0,0,0.21) rgba(0,0,0,0.21);
+	box-shadow: 0 1px 0 rgba(255,255,255,0.89),0 1px rgba(0,0,0,0.05) inset;
+	position: relative;
+}
+.card {
+    color: white;
+    background: rgb(42, 104, 89);
+}
+a.card-link {
+    color: white;
+}
+.yelp-results > .row {
+    overflow-x: auto;
+    white-space: nowrap;
+    flex-wrap: nowrap;
+    height: 50vh;
+}
+.yelp-results > .row > .col-xs-4 {
+  display: inline-block;
+  float: none;
+  margin: 5px;
+}
+
+#logandsign {
+  float: right;
+}
+
+td {
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+
+}
+
 .wrapper {
     display: flex;
     align-items: stretch;
@@ -154,23 +213,7 @@ ul ul a {
     opacity: 1;
     margin: 5px auto;
 }
-main {
-    width: 80vw;
-    margin: auto;
-}
-img {
-    height: 300px;
-    width: 350px;
-}
 
-.grid-container {
-  display: grid;
-  height: 100%;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-gap: 1px 1px;
-  grid-template-areas: ". . ." ". . ." ". . ." ". . ." ". . ." ". . .";
-}
 /* Shrinking the sidebar from 250px to 80px and center aligining its content*/
 #sidebar.active {
     min-width: 80px;
@@ -221,29 +264,4 @@ img {
     -webkit-transform: translateX(50%);
     -ms-transform: translateX(50%);
     transform: translateX(50%);
-}
-.card {
-    color: white;
-    background: #47748b;
-}
-.yelp-results > .row {
-  overflow-x: auto;
-  white-space: nowrap;
-  flex-wrap: nowrap;
-  height: 50vh;
-}
-.yelp-results > .row > .col-xs-4 {
-  display: inline-block;
-  float: none;
-  margin: 5px;
-
-#logandsign {
-  float: right;
-}
-
-td {
-  padding: 5px;
-  padding-left: 15px;
-  padding-right: 15px;
-
 }
