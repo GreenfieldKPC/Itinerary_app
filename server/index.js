@@ -26,12 +26,17 @@ app.use(express.static(path.join(__dirname, '/../client'))); // path to the fron
 // add user profile to database
 // req.body needs username, email, password, passwordConf (short for password confirmation)
 app.post('/signup', (req, res) => {
-  db.createUserProfile(req.body, (err) => {
+    req.on('data', (chunk)=>{
+        let userObj = JSON.parse(chunk);
+        db.createUserProfile(userObj, (err) => {
     if (err) {
       // notify user of error
       console.error(err, 'error signing up');
     }
   });
+    })
+   
+
   res.end();
 });
 
@@ -84,36 +89,53 @@ app.patch('/profile', (req, res) => {
 
 app.get('/loc/:locationID', (req, res) => {
   const location = req.path.slice(5);
-//   console.log(location, "LOCATION");
+
   handler.getTopRestaurants(location, (err, result) => {
     if (err) {
       console.log(err, 'ERROR IN SERVER');
     } else {
-    //   console.log(JSON.parse(result.body), 'RESULT IN SERVER');
+
     res.send(JSON.stringify(result.body));
     }
   });
 });
 
 app.get('/event/:locationId', (req, res) => {
+
   
   const location = req.path.slice(5);
   handler.getEvent(location, (err, result) => {
     if (err) {
       console.log(err, 'events');
     } else {
-      console.log(result.body);
       res.send(JSON.stringify(result.body));
+
     }
   });
 });
 
-// app.get('/login', (req, res) => {
-//   res.render('login');
-// });
-// // app.post('/login', (req, res) => {
+app.post('/login', (req, res) => {
+    const user = req.body
 
-// // });
+    db.logIn(user, (err, bool)=>{
+        if (err) {
+            console.log(err);
+            res.send(false)
+        } else {
+            if (bool) {
+                //create session and redirect
+                util.createSession(req, res, user.username);
+                res.send(true);
+            }
+        }
+        res.send(false);
+    });
+});
+
+app.get('/login', (req, res) => {
+  res.render('login');
+});
+
 // app.get('/signup', function (req, res) {
 //   res.render('signup');
 // });
