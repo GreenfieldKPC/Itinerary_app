@@ -46,16 +46,16 @@ app.get('/profile', (req, res) => {
 // add user profile to database
 // req.body needs username, email, password, passwordConf (short for password confirmation)
 app.post('/signup', (req, res) => {
-    req.on('data', (chunk)=>{
-        let userObj = JSON.parse(chunk);
-        db.createUserProfile(userObj, (err) => {
-    if (err) {
+  req.on('data', (chunk) => {
+    const userObj = JSON.parse(chunk);
+    db.createUserProfile(userObj, (err) => {
+      if (err) {
       // notify user of error
-      console.error(err, 'error signing up');
-    }
+        console.error(err, 'error signing up');
+      }
+    });
   });
-    })
-   
+
 
   res.end();
 });
@@ -115,46 +115,48 @@ app.get('/loc/:locationID', (req, res) => {
     if (err) {
       console.log(err, 'ERROR IN SERVER');
     } else {
-
-    res.send(JSON.stringify(result.body));
+      res.send(JSON.stringify(result.body));
     }
   });
 });
 
 app.get('/event/:locationId', (req, res) => {
-
-  
   const location = req.path.slice(5);
   handler.getEvent(location, (err, result) => {
     if (err) {
       console.log(err, 'events');
     } else {
       res.send(JSON.stringify(result.body));
-
     }
   });
 });
 
 app.post('/login', (req, res) => {
-    const user = req.body
+  const user = req.body;
 
-    db.logIn(user, (err, bool)=>{
-        if (err) {
-            console.log(err);
-            res.send(false)
-        } else {
-            if (bool) {
-                //create session and redirect
-                util.createSession(req, res, user.username);
-                res.send(true);
-            }
-        }
-        res.send(false);
-    });
+  db.logIn(user, (err, bool) => {
+    if (err) {
+      console.log(err);
+      res.send(false);
+    } else if (bool) {
+      // create session and redirect
+      util.createSession(req, res, user.username);
+      res.send(true);
+    }
+    res.sendfile(false);
+  });
 });
 
 app.get('/login', (req, res) => {
-  res.render('login');
+  res.redirect('/login.html');
+});
+
+app.get('/signup', (req, res) => {
+  res.redirect('/signup.html');
+});
+
+app.get('/interestsPage', (req, res) => {
+  res.redirect('/interestsPage.html');
 });
 
 // app.get('/signup', function (req, res) {

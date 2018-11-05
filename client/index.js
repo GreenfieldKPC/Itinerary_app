@@ -1,3 +1,47 @@
+// import Vue from 'vue';
+// import VueRouter from 'vue-router';
+// Vue.use(VueRouter);
+
+const login = {
+  template: `
+  <div id="loginAndSignUp" v-if="visitor()">
+  <div id="login" v-show="visitor"> <a href="/login">
+      <input type="text" placeholder="Enter username" v-model="usernameL">
+      <input type="password" placeholder="Enter password" v-model="passwordL">
+  <button class="login" value="Login" @click="login.call(this, usernameL, passwordL)"> LOG IN</button>
+</a>
+</div>
+  `,
+};
+
+const signup = {
+  template: `
+  <div id="signup"v-show="visitor"> <a href="/signup">
+  <input type="text" placeholder="Enter username" v-model="username">
+  <input type="text" placeholder="Enter email" v-model="email"> </br>
+  <input type="password" placeholder="Enter password" v-model="password">
+  <input type="password" placeholder="Confirm password" v-model="passConf">
+<button class="signup" value="SignUp" @click="signup.call(this, username, email, password, passConf)"> SIGN UP</button>
+</a>
+</div>
+  `,
+};
+
+const routes = [
+  {
+    path: '/login',
+    component: login,
+  }, {
+    path: '/signup',
+    component: signup,
+  },
+];
+
+const router = new VueRouter({
+  routes,
+});
+
+
 const Result = Vue.component('result', {
 
   template: `<li>
@@ -14,6 +58,7 @@ const Result = Vue.component('result', {
     },
   },
 });
+
 
 const Events = Vue.component('event', {
   template: `<div class="card">
@@ -66,6 +111,7 @@ const Interests = Vue.component('interest', {
 
 // MAIN APP COMPONENT
 const app = new Vue({
+  router,
   el: '#app',
   components: {
     result: Result,
@@ -160,7 +206,6 @@ const app = new Vue({
       //       events: [],
       toggle: true,
       usersInterest: [],
-
     };
   },
 
@@ -203,9 +248,9 @@ const app = new Vue({
           this.results = stuff.businesses;
           console.log(this.results, 'RESULTS FROM YELP IN CLIENT');
         });
-      
+
       fetch(`/event/${location}`)
-        .then((res) => res.json()).then((result) => {
+        .then(res => res.json()).then((result) => {
           result = JSON.parse(result);
           // limit number of results
           this.events = result.events.slice(0, 5);
@@ -218,11 +263,11 @@ const app = new Vue({
     clickOninterest(clicked) {
       clicked = !clicked;
     },
-    selected (e) {
+    selected(e) {
       // //$(e.currentTarget).css('background', '#41c69e')
       // 'selected' = true;
       console.log(e);
     },
 
   },
-});
+}).$mount('#app');
