@@ -173,8 +173,7 @@ h2 {
     margin-left: 17vw;
 }
 #profileInfo {
-    margin-top: 10vh !important;
-    height: 22vw;
+    height: 20vw;
     width: 40vw;
     min-width: 550px;
     min-height: 250px;
@@ -190,4 +189,10 @@ h2 {
 #login .col-md-8 {
     margin-left: 2.5vw;
     margin-top: 3vw;
+}
+.location-input {
+    margin-top: 10vh;
+}
+interest {
+    margin-bottom: 30vh !important;
 }
