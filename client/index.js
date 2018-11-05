@@ -22,7 +22,7 @@ const Navi = Vue.component('navi', {
               <a href <router-link to="/profile">Profile<i class="fa fa-cog menu-icon fa-2x" aria-hidden="true"></i></a>
             </li>
             <li>
-              <a href="#">Calender<i class="fa fa-calendar menu-icon fa-2x" aria-hidden="true"></i></a>
+              <a href="https://calendar.google.com/calendar/r" target="_blank">Calender<i class="fa fa-calendar menu-icon fa-2x" aria-hidden="true"></i></a>
             </li>
             <li>
               <a href="#">log out<i class="fa fa-sign-out menu-icon fa-2x" aria-hidden="true"></i>
