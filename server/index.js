@@ -45,19 +45,6 @@ app.post('/login', (req, res) => {
 
         // create session and redirect
         util.createSession(req, res, user.username);
-        // db.getUserInterests(user, (error, interest) => {
-        //   if (error) {
-        //     res.send(error);
-        //   } else {
-        //     handler.getUserInterest(interest, (errors, result) => {
-        //       if (errors) {
-        //         res.send(errors);
-        //       } else {
-        //         res.send(result);
-        //       }
-        //     });
-        //   }
-        // });
         // res.redirect('/');
       } else {
         console.log('NOT A USER');
@@ -97,7 +84,7 @@ app.patch('/interests', (req, res) => {
 // get user interests
 // query database by username, receive array of interests
 app.get('/interests', (req, res) => {
-  console.log(req.query.username, 'hello');
+  console.log('triggered');
   db.getUserInterests(req.query.username, (err, interests) => {
     if (err) {
       // notify user of error

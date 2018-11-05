@@ -27,7 +27,7 @@
         <div class="col-md-12">
             <div class="page-header">
               <h1>
-                What's The Name Of Our App? <small>Itinerary builder</small>
+                DANG! <small> what should I do today? </small>
               </h1>
             </div>
  <!-- LOG IN AND SIGN UP BUTTONS -->
@@ -49,7 +49,7 @@
           </router-view>
             <!-- LOCATION SEARCH BAR-->
             <div class="location-input" v-if="loggedInUser()">
-             
+             <h2>Find what's happenin!</h2>
               <input type="text" placeholder="Enter location" @keyup.enter="search.call(this, location)" v-model="location">
               <input type="submit" value="Search" @click="search.call(this, location)">
               <button id="geoLocator" @click="geoLocate()">Get My Location</button>
