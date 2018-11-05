@@ -7,21 +7,6 @@ let is_visitor = true;
 let showResults = false;
 let userInterests = [];
 
-const Navi = Vue.component('navi', {
-  template: `
-  'hello!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
-  `,
-  methods: {
-    show() {
-      return !is_visitor;
-    },
-  },
-});
-
-const Profile = Vue.component('profile', {
-
-});
-
 // LOG IN COMPONENET
 const Login = Vue.component('login', {
   // html to render
