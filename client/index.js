@@ -173,11 +173,14 @@ const Events = Vue.component('event', {
 // INTERESTS COMPONENT
 const Interests = Vue.component('interest', {
   // html to render
-  template: ` 
-  <div class="container-fluid interests" id="accordion">
-  HELLOOOOOOOOOOOOOOOOOOOOO
+  template: ` <div class="container-fluid interests" id="accordion">
+  <div class="row text-center">
+    <div class="col-md-3"
+    v-for="interest in interests" :interest="interest"
+    @click="clickOninterest(interest.clicked)">   <button type="button" class="btn btn-block btn-warning">{{ interest }} </button>  </div>
+  </div>
 </div>
- `,
+  `,
   props: ['interest'],
   data() {
     return {
