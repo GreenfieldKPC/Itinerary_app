@@ -3,8 +3,19 @@
 // Vue.use(VueRouter);
 
 // IS USER LOGGED IN?
-let is_visitor = false;
+let is_visitor = true;
 let showInterests = false;
+
+const Navi = Vue.component('navi', {
+  template: `
+  'hello!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
+  `,
+  methods: {
+    show() {
+      return !is_visitor;
+    },
+  },
+});
 
 // LOG IN COMPONENET
 const Login = Vue.component('login', {
@@ -37,6 +48,10 @@ const Login = Vue.component('login', {
         console.log(response.ok, 'RESPONSE IN CLIENT');
         if (response.ok) {
           is_visitor = false;
+          if (!is_visitor) {
+            // If not authenticated, add a path where to redirect after login.
+            this.$router.push({ path: '/home' });
+          }
         }
       });
     },
@@ -76,7 +91,12 @@ const Signup = Vue.component('signup', {
           username, email, password, passwordConf,
         }),
       }).then((response) => {
-        console.log(response);
+        console.log(response.ok);
+        is_visitor = false;
+        if (!is_visitor) {
+          // If not authenticated, add a path where to redirect after login.
+          this.$router.push({ path: '/interestsPage' });
+        }
       });
     },
   },
@@ -239,13 +259,14 @@ const app = new Vue({
     login: Login,
     signup: Signup,
     home: Home,
+    navi: Navi,
   },
 
   data() {
     return {
       // updates from v-model text input search
       geolocation: '',
-      location: '',
+      location: 'new orleans',
       interests: ['business', 'education', 'performing and arts', 'sports', 'film and media', 'community and culture', 'charity and causes', 'travel and outdoor', 'science and technology', 'health and wellness', 'fashion', 'seasonal', 'regional', 'government', 'home and lifestyle', 'other'],
       results: [],
 
@@ -339,6 +360,7 @@ const app = new Vue({
         navigator.geolocation.getCurrentPosition((position) => {
           self.position = position.coords;
           console.log(self.position.latitude, self.position.longitude);
+          // REQUESTS TO YELP AND EVENTBRITE
         });
       }
     },

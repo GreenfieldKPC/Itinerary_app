@@ -17,36 +17,39 @@
 
 <body>
 <!-- V if logged in?  would have to be in main app component -->
-
-<div class="sidebar">
-    <ul class="sidebar-nav">
-      <li>
-        <a id="navbar-toggle">Close <i class="fa fa-bars menu-icon fa-2x" aria-hidden="true"></i></a>
-      </li>
-      <li>
-          <router-link to="/home">  <a href="#/home">Home<i class="fa fa-home menu-icon fa-2x" aria-hidden="true"></i></a></router-link> 
-      </li>
-      <li>
-          <router-link to="/interestsPage">   <a href="#/interestsPage">  Interests<i class="fa fa-search-plus menu-icon fa-2x" aria-hidden="true"></i></a></router-link> 
-      </li>
-      <li>
-        <a href="#">Profile<i class="fa fa-cog menu-icon fa-2x" aria-hidden="true"></i></a>
-      </li>
-      <li>
-        <a href="#">Calender<i class="fa fa-calendar menu-icon fa-2x" aria-hidden="true"></i></a>
-      </li>
-      <li>
-        <a href="#">log out<i class="fa fa-sign-out menu-icon fa-2x" aria-hidden="true"></i>
-        </a>
-      </li>
-  
-    </ul>
-  </div>
+<Navi>
+    <div id='navi' v-if="show()">
+        <div class="sidebar" >
+            <ul class="sidebar-nav">
+              <li>
+                <a id="navbar-toggle">Close <i class="fa fa-bars menu-icon fa-2x" aria-hidden="true"></i></a>
+              </li>
+              <li>
+                  <router-link to="/home">  <a href="#/home">Home<i class="fa fa-home menu-icon fa-2x" aria-hidden="true"></i></a></router-link> 
+              </li>
+              <li>
+                  <router-link to="/interestsPage">   <a href="#/interestsPage">  Interests<i class="fa fa-search-plus menu-icon fa-2x" aria-hidden="true"></i></a></router-link> 
+              </li>
+              <li>
+                <a href="#">Profile<i class="fa fa-cog menu-icon fa-2x" aria-hidden="true"></i></a>
+              </li>
+              <li>
+                <a href="#">Calender<i class="fa fa-calendar menu-icon fa-2x" aria-hidden="true"></i></a>
+              </li>
+              <li>
+                <a href="#">log out<i class="fa fa-sign-out menu-icon fa-2x" aria-hidden="true"></i>
+                </a>
+              </li>
+          
+            </ul>
+          </div>
+        </div>
+      </Navi>
  
   
  <!-- END NAV BAR -->
   <main id="app">
-   
+    
     <!-- LOG IN AND SIGN UP BUTTONS -->
     <div id="logAndSignButtons" v-if="isVisitor()">
      <router-link to="/logIn"><button>Log In</button>
