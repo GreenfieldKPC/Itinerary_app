@@ -9,7 +9,32 @@ let userInterests = [];
 
 const Navi = Vue.component('navi', {
   template: `
-  'hello!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
+  <div id='navi' >
+        <div class="sidebar">
+          <ul class="sidebar-nav">
+            <li>
+              <a id="navbar-toggle">Close <i class="fa fa-bars menu-icon fa-2x" aria-hidden="true"></i></a>
+            </li>
+            <li>
+              <a href=<router-link to="/home">Home<i class="fa fa-home menu-icon fa-2x" aria-hidden="true"></i></a>
+            </li>
+            <li>
+              <a href=<router-link to="/interestsPage">Interests<i class="fa fa-search-plus menu-icon fa-2x"aria-hidden="true"></i></a>
+            </li>
+            <li>
+              <a href=<router-link to="/profilePage">Profile<i class="fa fa-cog menu-icon fa-2x" aria-hidden="true"></i></a>
+            </li>
+            <li>
+              <a href="#">Calender<i class="fa fa-calendar menu-icon fa-2x" aria-hidden="true"></i></a>
+            </li>
+            <li>
+              <a href="#">log out<i class="fa fa-sign-out menu-icon fa-2x" aria-hidden="true"></i>
+              </a>
+            </li>
+    
+          </ul>
+        </div>
+      </div>
   `,
   methods: {
     show() {

@@ -16,44 +16,12 @@
 </head>
 
 <body>
-<!-- V if logged in?  would have to be in main app component -->
-<Navi>
-    <div id='navi' v-if="show()">
-        <div class="sidebar" >
-            <ul class="sidebar-nav">
-              <li>
-                <a id="navbar-toggle">Close <i class="fa fa-bars menu-icon fa-2x" aria-hidden="true"></i></a>
-              </li>
-              <li>
-                  <router-link to="/home">  <a href="#/home">Home<i class="fa fa-home menu-icon fa-2x" aria-hidden="true"></i></a></router-link> 
-              </li>
-              <li>
-                  <router-link to="/interestsPage">   <a href="#/interestsPage">  Interests<i class="fa fa-search-plus menu-icon fa-2x" aria-hidden="true"></i></a></router-link> 
-              </li>
-              <li>
-                  <router-link to="/profilePage"><a href="#">Profile<i class="fa fa-cog menu-icon fa-2x" aria-hidden="true"></i></a></router-link>
-              </li>
-              <li>
-                <a href="#">Calender<i class="fa fa-calendar menu-icon fa-2x" aria-hidden="true"></i></a>
-              </li>
-              <li>
-                <a href="#">log out<i class="fa fa-sign-out menu-icon fa-2x" aria-hidden="true"></i>
-                </a>
-              </li>
-          
-            </ul>
-          </div>
-        </div>
-      </Navi>
- 
-  
- <!-- END NAV BAR -->
   <main id="app">
-    
-   
+    <!-- V if logged in?  would have to be in main app component -->
+   <Navi></Navi>   
     <!-- TITLE/HEADER-->
-    
-
+  
+    <div class="container-fluid" id="view">
     <div class="container-fluid">
         <div class="row">
           <div class="col-md-12">
@@ -101,12 +69,9 @@
             </div> 
           </div>
         </div>
-        
-     
         </div>
     </div>
-    
-
+    </div>
   </main>
   
   <script type="text/javascript" src="index.js"></script>
@@ -122,12 +87,12 @@
         $('#navbar-toggle').click(function () {
           if (state == "expanded") {
             $('.sidebar').css('margin-left', '-180px');
-            $('main').css('margin-left', '10vw');
+            $('#view').css('margin-left', '10vw');
             state = "minimized";
           } else {
             if (state == "minimized") {
               $('.sidebar').css('margin-left', '0px');
-              $('main').css('margin-left', '20vw');
+              $('#view').css('margin-left', '20vw');
               state = "expanded";
             }
           }
