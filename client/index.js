@@ -16,13 +16,10 @@ const Navi = Vue.component('navi', {
               <a id="navbar-toggle">Close <i class="fa fa-bars menu-icon fa-2x" aria-hidden="true"></i></a>
             </li>
             <li>
-              <a href=<router-link to="/home">Home<i class="fa fa-home menu-icon fa-2x" aria-hidden="true"></i></a>
+              <a href <router-link to="/home">Home<i class="fa fa-home menu-icon fa-2x" aria-hidden="true"></i></a>
             </li>
             <li>
-              <a href=<router-link to="/interestsPage">Interests<i class="fa fa-search-plus menu-icon fa-2x"aria-hidden="true"></i></a>
-            </li>
-            <li>
-              <a href=<router-link to="/profilePage">Profile<i class="fa fa-cog menu-icon fa-2x" aria-hidden="true"></i></a>
+              <a href <router-link to="/profile">Profile<i class="fa fa-cog menu-icon fa-2x" aria-hidden="true"></i></a>
             </li>
             <li>
               <a href="#">Calender<i class="fa fa-calendar menu-icon fa-2x" aria-hidden="true"></i></a>
@@ -101,7 +98,7 @@ const Signup = Vue.component('signup', {
   template: `
   <div id="signup">
   <input type="text" placeholder="Enter username" v-model="username">
-  <input type="text" placeholder="Enter email" v-model="email"> </br>
+  <input type="text" placeholder="Update" v-model="email"> </br>
   <input type="password" placeholder="Enter password" v-model="password">
   <input type="password" placeholder="Confirm password" v-model="passConf">
 <button class="signup" value="SignUp" @click="signup.call(this, username, email, password, passConf)"> SIGN UP</button>
@@ -201,12 +198,25 @@ const Events = Vue.component('event', {
 // INTERESTS COMPONENT
 const Interests = Vue.component('interest', {
   // html to render
-  template: ` <div class="container-fluid interests" id="accordion">
+  template: ` 
+  <div>
+  <div id="profileInfo">
+  </br>
+  <h2> Update Profile Information </h2>
+  <input type="text" placeholder="enter new email address"> <button>UPDATE EMAIL </button> </input> </br> </br>
+  <input type="password" placeholder="enter new password"> <input type="password" placeholder="confirm password"> <button>UPDATE PASSWORD </button> </input>
+  </div>
+  </br>
+  <h2> Interests </h2>
+  <div class="container-fluid interests" id="accordion">
   <div class="row text-center">
     <div class="col-md-3"
     v-for="interest in interests" :interest="interest"
     @click="clickOninterest(interest.clicked)">   <button type="button" class="btn btn-block btn-warning">{{ interest }} </button>  </div>
   </div>
+</div>
+</br>
+</br>
 </div>
   `,
   props: ['interest'],
@@ -249,7 +259,7 @@ const routes = [
     component: Signup,
   },
   {
-    path: '/interestsPage',
+    path: '/profile',
     component: Interests,
   },
   {
