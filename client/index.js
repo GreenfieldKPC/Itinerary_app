@@ -369,7 +369,7 @@ const app = new Vue({
         .then(res => res.json()).then((result) => {
           result = JSON.parse(result);
           // limit number of results
-          this.events = result.events.slice(0, 5);
+          this.events = result.events.slice(0, 15);
         });
       // fetch(`/interest/`)
     },
