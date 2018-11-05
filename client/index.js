@@ -28,7 +28,7 @@ const Events = Vue.component('event', {
                 <img v-bind:src='event.logo.url'/><br>
                   {{ event.description.text }}<br>
                   <a href="event.url">Website</a><br>
-                  <a :href="calendarURL" target="_blank">Add to Calendar</a>
+                  <a @click="add()" :href="calendarURL" target="_blank">Add to Calendar</a>
                 </div>
               </div>
             </div>`,

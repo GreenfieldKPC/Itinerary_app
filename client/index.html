@@ -71,7 +71,7 @@
         </div>
         <!-- collapse for event results -->
         <!-- maybe limit to 5-10 of each result type -->
-        <div class="container event-results">
+        <div class="container event-results" id="itenerary" v-if="loggedInUser()">
           <h3>Click event for details</h3>
           <div class="event-results"id="card-317479">
             <event v-for="event in events" :event="event" :key="event.id"></event>
