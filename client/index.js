@@ -215,23 +215,20 @@ const Interests = Vue.component('interest', {
   // html to render
   template: ` 
   <div v-if="show()">
-  <div id="profileInfo">
-  </br>
-  <h2> Update Profile Information </h2>
-  <input type="text" placeholder="enter new email address"> <button>UPDATE EMAIL </button> </input> </br> </br>
-  <input type="password" placeholder="enter new password"> <input type="password" placeholder="confirm password"> <button>UPDATE PASSWORD </button> </input>
-  </div>
-  </br>
-  <h2> Interests </h2>
+    <div id="profileInfo" class="container-fluid">
+      <h2> Update Profile Information </h2>
+      <input type="text" placeholder="enter new email address"> <button>Update</button> </input> </br> </br>
+      <input type="password" placeholder="enter new password"> <input type="password" placeholder="confirm password"> <button>Update</button> </input>
+    </div>
+  
   <div class="container-fluid interests">
-  <div class="row text-center">
-    <div class="col-md-3"
-    v-for="interest in interests" :interest="interest" 
-    @click="updateUserInterests(interest)">   <button type="button" class="btn btn-block btn-warning">{{ interest }} </button>  </div>
+    <h2> Interests </h2>
+    <div class="row text-center">
+      <div class="col-md-3"
+      v-for="interest in interests" :interest="interest" 
+      @click="updateUserInterests(interest)">   <button type="button" class="btn btn-block btn-warning">{{ interest }} </button>  </div>
+    </div>
   </div>
-</div>
-</br>
-</br>
 </div>
   `,
   props: ['interest', 'userClick'],

@@ -49,7 +49,7 @@
           </router-view>
             <!-- LOCATION SEARCH BAR-->
             <div class="location-input" v-if="loggedInUser()">
-             
+             <h2>Find what's happenin!</h2>
               <input type="text" placeholder="Enter location" @keyup.enter="search.call(this, location)" v-model="location">
               <input type="submit" value="Search" @click="search.call(this, location)">
               <button id="geoLocator" @click="geoLocate()">Get My Location</button>

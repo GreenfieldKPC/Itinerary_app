@@ -104,10 +104,17 @@ td {
   padding-right: 15px;
 }
 
+#profileInfo, .interests {
+    margin-bottom: 10vh;
+}
+h2 {
+    margin-bottom: 5vh;
+}
+
 .sidebar {
     color: #FFF;
     background:rgb(31, 54, 85);
-    width: 250px;
+    width: 20vw;
     max-width: 250px;
     height: 100%;
     margin-left: 0vw;
@@ -154,11 +161,22 @@ td {
     -webkit-transition: background 0.5s;
     transition: background 0.5s;
 }
-#login, #signup {
+#login, #signup, #profileInfo {
     margin-top: 10vh !important;
     height: 20vw;
     width: 20vw;
     min-width: 250px;
+    min-height: 250px;
+    border: 10px rgb(42, 104, 89) inset;
+    border-radius: 10px;
+    background-color: rgb(114, 81, 129);
+    margin-left: 17vw;
+}
+#profileInfo {
+    margin-top: 10vh !important;
+    height: 22vw;
+    width: 40vw;
+    min-width: 550px;
     min-height: 250px;
     border: 10px rgb(42, 104, 89) inset;
     border-radius: 10px;
