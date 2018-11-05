@@ -154,3 +154,20 @@ td {
     -webkit-transition: background 0.5s;
     transition: background 0.5s;
 }
+#login, #signup {
+    margin-top: 10vh !important;
+    height: 20vw;
+    width: 20vw;
+    border: 10px rgb(42, 104, 89) inset;
+    border-radius: 10px;
+    background-color: rgb(114, 81, 129);
+    margin-left: 17vw;
+}
+#signup .col-md-8 {
+    margin-left: 2.5vw;
+    margin-top: 1vw;
+}
+#login .col-md-8 {
+    margin-left: 2.5vw;
+    margin-top: 3vw;
+}
