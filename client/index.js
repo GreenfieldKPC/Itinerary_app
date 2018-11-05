@@ -55,6 +55,7 @@ const Login = Vue.component('login', {
 </a>
 </div>
   `,
+  props: ['usersInterest'],
   // value of input fields for username and password
   data() {
     return {
@@ -74,11 +75,9 @@ const Login = Vue.component('login', {
       }).then((response) => {
         console.log(response, 'RESPONSE IN CLIENT');
         if (response) {
-          fetch(`/interests?username=${this.usernameL}`).then((resp) => resp.json()).then((text) => {
+          fetch(`/interests/?username=${this.usernameL}`).then(resp => resp.json()).then((text) => {
             userInterests = text.interests;
-            console.log(userInterests);
-          }).catch((err) => {
-            console.log(err, 'error getting interests');
+            return this.$parent.usersInterest;
           });
           // fetch(`/loc/${location}`)
           is_visitor = false;
@@ -88,6 +87,11 @@ const Login = Vue.component('login', {
           }
         }
       });
+      // fetch('/interest', {
+      //   method: 'PATCH',
+      //   headers: new Headers(),
+      //   body: JSON.stringify({ username: user, interest: this.$parent.userInterests }),
+      // }).then(res => res.json()).then(response => response);
     },
   },
 });
@@ -238,7 +242,7 @@ const Interests = Vue.component('interest', {
       // change button color to green
       // add interest to user profile if user is logged in
       this.$parent.clickOninterest(e);
-      this.userClick(e);
+      // this.userClick(e);
     },
   },
 });
@@ -411,6 +415,7 @@ const app = new Vue({
           // limit number of results
           this.events = result.events.slice(0, 5);
         });
+      // fetch(`/interest/`)
     },
     add() {
       console.log('click');
