@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.1/vue-router.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.1/vue-router.min.js"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
     crossorigin="anonymous">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="style.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,11 +19,11 @@
 <body>
   <main id="app">
     <!-- V if logged in?  would have to be in main app component -->
-   <Navi></Navi>   
+    <Navi></Navi>
     <!-- TITLE/HEADER-->
-  
+
     <div class="container-fluid" id="view">
-    <div class="container-fluid">
+      <div class="container-fluid">
         <div class="row">
           <div class="col-md-12">
             <div class="page-header">
@@ -30,50 +31,55 @@
                 What's The Name Of Our App? <small>Itinerary builder</small>
               </h1>
             </div>
- <!-- LOG IN AND SIGN UP BUTTONS -->
- <div id="logAndSignButtons" v-if="isVisitor()">
-    <router-link to="/logIn"><button>Log In</button>
-   </router-link>
-         <router-link to="/signUp"> <button>Sign Up</button></router-link>
-        
-   </div>
+            <!-- LOG IN AND SIGN UP BUTTONS -->
+            <div id="logAndSignButtons" v-if="isVisitor()">
+              <router-link to="/logIn"><button>Log In</button>
+              </router-link>
+              <router-link to="/signUp"> <button>Sign Up</button></router-link>
+
+            </div>
 
             <router-view>
-              </router-view>
+            </router-view>
             <!-- LOCATION SEARCH BAR-->
             <div v-if="loggedInUser()">
+
+              <div class="location-input">
+
+                <input type="text" placeholder="Enter location" @keyup.enter="search.call(this, location)" v-model="location">
+                <input type="submit" value="Search" @click="search.call(this, location)">
+                <button id="geoLocator" @click="geoLocate()">Get My Location</button>
+              </div>
+              <interest :userClick="clickOninterest"></interest>
+
+              <!-- side scrollspy for yelp results -->
+              <!-- maybe limit to 5-10 of each result type -->
+              <div class="container yelp-results">
+                <div class="row text-center">
+                  <!-- list of results -->
+                  <result class="col-xs-4" v-for="result in results" :business="result"></result>
+                </div>
+              </div>
+
+              <!-- collapse for event results -->
+              <!-- maybe limit to 5-10 of each result type -->
+              <div class="container event-results" v-if="loggedInUser()">
+                <h3>Click event for details</h3>
+                <div class="event-results" id="card-317479">
+                  <event v-for="event in events" :event="event" :key="event.id"></event>
+                  
+                </div>
               
-            <div class="location-input">
-             
-              <input type="text" placeholder="Enter location" @keyup.enter="search.call(this, location)" v-model="location">
-              <input type="submit" value="Search" @click="search.call(this, location)">
-              <button id="geoLocator" @click="geoLocate()">Get My Location</button>
-            </div>
-    
-            <!-- side scrollspy for yelp results -->
-            <!-- maybe limit to 5-10 of each result type -->
-            <div class="container yelp-results">
-              <div class="row text-center">
-                <!-- list of results -->
-                <result class="col-xs-4" v-for="result in results" :business="result"></result>
+              
+              
               </div>
             </div>
-          
-            <!-- collapse for event results -->
-            <!-- maybe limit to 5-10 of each result type -->
-            <div class="container event-results" v-if="loggedInUser()">
-              <h3>Click event for details</h3>
-              <div class="event-results"id="card-317479">
-                <event v-for="event in events" :event="event" :key="event.id"></event>
-              </div>
-            </div> 
           </div>
         </div>
-        </div>
-    </div>
+      </div>
     </div>
   </main>
-  
+
   <script type="text/javascript" src="index.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
@@ -81,22 +87,23 @@
     crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
     crossorigin="anonymous"></script>
-    <script>
-      var state = "expanded";
-        //Check if navbar is expanded or minimized and handle 
-        $('#navbar-toggle').click(function () {
-          if (state == "expanded") {
-            $('.sidebar').css('margin-left', '-180px');
-            $('#view').css('margin-left', '10vw');
-            state = "minimized";
-          } else {
-            if (state == "minimized") {
-              $('.sidebar').css('margin-left', '0px');
-              $('#view').css('margin-left', '20vw');
-              state = "expanded";
-            }
-          }
-        })
-    </script>
+  <script>
+    var state = "expanded";
+    //Check if navbar is expanded or minimized and handle 
+    $('#navbar-toggle').click(function () {
+      if (state == "expanded") {
+        $('.sidebar').css('margin-left', '-180px');
+        $('#view').css('margin-left', '10vw');
+        state = "minimized";
+      } else {
+        if (state == "minimized") {
+          $('.sidebar').css('margin-left', '0px');
+          $('#view').css('margin-left', '20vw');
+          state = "expanded";
+        }
+      }
+    })
+  </script>
 </body>
+
 </html>
