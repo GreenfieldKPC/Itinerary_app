@@ -45,7 +45,7 @@ body {
 	}
 }
 
-main {
+#view {
     width: 80vw;
     margin-left: 20vw;
     -webkit-transition: margin 2s;
@@ -110,6 +110,7 @@ td {
     width: 250px;
     max-width: 250px;
     height: 100%;
+    margin-left: 0vw;
     float: left;
     position: fixed;
     z-index: 1000;

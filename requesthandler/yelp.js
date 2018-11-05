@@ -32,8 +32,6 @@ const getEvent = function (location ,callback) {
       "verify" : true,
       "maxResult": 20,
     },
-    
-
   }, (err, res) => {
     if (err) {
       console.log(err);
@@ -89,12 +87,12 @@ const getUserInterest = function (array, callback) {
       category: 'government'
     },
     { id: 117,
-      category: 'home and lifestyle'
+      category: 'home and lifestyle',
     },
     { id: 199,
-      category: 'other'
+      category: 'other',
     }];
-    const interestId = interests.map((obj) => {
+  const interestId = interests.map((obj) => {
       array.forEach((interest) => {
         if (obj.category === interest) {
           return obj.id;
