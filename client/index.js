@@ -77,9 +77,7 @@ const Login = Vue.component('login', {
       }).then((response) => {
         console.log(response, 'RESPONSE IN CLIENT');
         if (response) {
-          fetch(`/interests?username=${this.usernameL}`).then((resp) => {
-            return resp.json();
-          }).then((text) => {
+          fetch(`/interests?username=${this.usernameL}`).then((resp) => resp.json()).then((text) => {
             userInterests = text.interests;
             console.log(userInterests);
           }).catch((err) => {
@@ -147,7 +145,7 @@ const Result = Vue.component('result', {
   template: `<li>
   <img v-bind:src='business.image_url'/><br>
       {{ business.name }}<br>{{ business.location.address1 +'. '+ business.location.city +', '+ business.location.state }}<br>
-      <a href="business.url">Website</a><br>
+      <a :href="business.url" target="_blank">Website</a><br> 
       <a :href="calendarURL" target="_blank">Add to Calendar</a>
       </li>`,
   // list of places
@@ -174,8 +172,13 @@ const Events = Vue.component('event', {
                 <div class="card-body">
                 <img v-bind:src='event.logo.url'/><br>
                   {{ event.description.text }}<br>
+<<<<<<< HEAD
                   <a href="event.url">Website</a><br>
                   <a @click="add()" :href="calendarURL" target="_blank">Add to Calendar</a>
+=======
+                  <a :href="event.url" target="_blank"> Website</a><br>
+                  <a :href="calendarURL" target="_blank">Add to Calendar</a>
+>>>>>>> afc867bd710e2ff45d55882ea43c027e22e60ec2
                 </div>
               </div>
             </div>`,
@@ -271,7 +274,6 @@ const app = new Vue({
     login: Login,
     signup: Signup,
     home: Home,
-    navi: Navi,
   },
 
   data() {
