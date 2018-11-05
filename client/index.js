@@ -3,7 +3,7 @@
 // Vue.use(VueRouter);
 
 // IS USER LOGGED IN?
-let is_visitor = false;
+let is_visitor = true;
 let showResults = false;
 let userInterests = [];
 
