@@ -84,14 +84,16 @@ app.patch('/interests', (req, res) => {
 // get user interests
 // query database by username, receive array of interests
 app.get('/interests', (req, res) => {
+  console.log('triggered');
   db.getUserInterests(req.query.username, (err, interests) => {
     if (err) {
       // notify user of error
       console.error(err, 'error getting interests');
       res.send(err);
     } else {
+      console.log(interests, 'interests');
       // return array of interests
-      res.send(interests);
+      res.send(JSON.stringify({ interests }));
     }
   });
 });
@@ -120,6 +122,7 @@ app.get('/loc/:locationID', (req, res) => {
       console.log(err, 'ERROR IN SERVER');
     } else {
       console.log(result.body);
+      // sort by interests??????
       res.send(JSON.stringify(result.body));
     }
   });

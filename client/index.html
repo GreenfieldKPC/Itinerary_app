@@ -31,7 +31,7 @@
                   <router-link to="/interestsPage">   <a href="#/interestsPage">  Interests<i class="fa fa-search-plus menu-icon fa-2x" aria-hidden="true"></i></a></router-link> 
               </li>
               <li>
-                <a href="#">Profile<i class="fa fa-cog menu-icon fa-2x" aria-hidden="true"></i></a>
+                  <router-link to="/profilePage"><a href="#">Profile<i class="fa fa-cog menu-icon fa-2x" aria-hidden="true"></i></a></router-link>
               </li>
               <li>
                 <a href="#">Calender<i class="fa fa-calendar menu-icon fa-2x" aria-hidden="true"></i></a>
@@ -73,7 +73,10 @@
 
             
             <!-- LOCATION SEARCH BAR-->
-            <div class="location-input" v-if="loggedInUser()">
+            <div v-if="loggedInUser()">
+              
+            <div class="location-input">
+             
               <input type="text" placeholder="Enter location" @keyup.enter="search.call(this, location)" v-model="location">
               <input type="submit" value="Search" @click="search.call(this, location)">
               <button id="geoLocator" @click="geoLocate()">Get My Location</button>
@@ -81,7 +84,7 @@
     
             <!-- side scrollspy for yelp results -->
             <!-- maybe limit to 5-10 of each result type -->
-            <div class="container yelp-results" v-if="loggedInUser()">
+            <div class="container yelp-results">
               <div class="row text-center">
                 <!-- list of results -->
                 <result class="col-xs-4" v-for="result in results" :business="result"></result>
@@ -98,7 +101,10 @@
             </div> 
           </div>
         </div>
-      </div>
+        
+     
+    </div>
+    
 
   </main>
   

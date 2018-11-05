@@ -3,8 +3,9 @@
 // Vue.use(VueRouter);
 
 // IS USER LOGGED IN?
-let is_visitor = true;
-let showInterests = false;
+let is_visitor = false;
+let showResults = false;
+let userInterests = [];
 
 const Navi = Vue.component('navi', {
   template: `
@@ -15,6 +16,10 @@ const Navi = Vue.component('navi', {
       return !is_visitor;
     },
   },
+});
+
+const Profile = Vue.component('profile', {
+
 });
 
 // LOG IN COMPONENET
@@ -45,8 +50,17 @@ const Login = Vue.component('login', {
         headers: new Headers(),
         body: JSON.stringify({ username: user, password: pass }),
       }).then((response) => {
-        console.log(response.ok, 'RESPONSE IN CLIENT');
-        if (response.ok) {
+        console.log(response, 'RESPONSE IN CLIENT');
+        if (response) {
+          fetch(`/interests?username=${this.usernameL}`).then((resp) => {
+            return resp.json();
+          }).then((text) => {
+            userInterests = text.interests;
+            console.log(userInterests);
+          }).catch((err) => {
+            console.log(err, 'error getting interests');
+          });
+          // fetch(`/loc/${location}`)
           is_visitor = false;
           if (!is_visitor) {
             // If not authenticated, add a path where to redirect after login.
@@ -94,7 +108,7 @@ const Signup = Vue.component('signup', {
         console.log(response.ok);
         is_visitor = false;
         if (!is_visitor) {
-          // If not authenticated, add a path where to redirect after login.
+          // take user to interests after signing up
           this.$router.push({ path: '/interestsPage' });
         }
       });
@@ -191,37 +205,7 @@ const Interests = Vue.component('interest', {
 });
 
 const Home = Vue.component('home', {
-//   <div class="container-fluid">
-//   <div class="row">
-//     <div class="col-md-12">
-//       <div class="page-header">
-//         <h1>
-//           What's The Name Of Our App? <small>Itinerary builder</small>
-//         </h1>
-//       </div>
-//       <div class="location-input" v-if="loggedInUser()">
-//         <input type="text" placeholder="Enter location" @keyup.enter="search.call(this, location)" v-model="location">
-//         <input type="submit" value="Search" @click="search.call(this, location)">
-//         <button id="geoLocator" @click="geoLocate()">Get My Location</button>
-//       </div>
-//       <div class="container yelp-results" v-if="loggedInUser()">
-//         <div class="row text-center">
-//           <!-- list of results -->
-//           <result class="col-xs-4" v-for="result in results" :business="result"></result>
-//         </div>
-//       </div>
-//       <div class="container event-results" v-if="loggedInUser()">
-//         <h3>Click event for details</h3>
-//         <div class="event-results"id="card-317479">
-//           <event v-for="event in events" :event="event" :key="event.id"></event>
-//         </div>
-//       </div> 
-//     </div>
-//   </div>
-// </div>
-// `,
-  template: `
- `,
+
 });
 
 // ROUTES
@@ -364,8 +348,11 @@ const app = new Vue({
         });
       }
     },
+    displayResults() {
+      return showResults;
+    },
     toggleInterests() {
-      showInterests = !showInterests;
+      showResults = !showResults;
     },
     search(location) {
       fetch(`/loc/${location}`)
@@ -374,7 +361,7 @@ const app = new Vue({
           console.log(response, 'RESPONSE IN CLIENT');
           return response.json();
         }).then((data) => {
-          console.log(data,' DATA IN CLIENT');
+          console.log(data, ' DATA IN CLIENT');
           const stuff = JSON.parse(data);
           this.results = stuff.businesses;
           console.log(this.results, 'RESULTS FROM YELP IN CLIENT');
