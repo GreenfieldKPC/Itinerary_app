@@ -22,7 +22,7 @@ const Navi = Vue.component('navi', {
               <a href=<router-link to="/interestsPage">Interests<i class="fa fa-search-plus menu-icon fa-2x"aria-hidden="true"></i></a>
             </li>
             <li>
-              <a href=<router-link to="/profilePage">Profile<i class="fa fa-cog menu-icon fa-2x" aria-hidden="true"></i></a>
+              <a href=<router-link to="/profile">Profile<i class="fa fa-cog menu-icon fa-2x" aria-hidden="true"></i></a>
             </li>
             <li>
               <a href="#">Calender<i class="fa fa-calendar menu-icon fa-2x" aria-hidden="true"></i></a>
