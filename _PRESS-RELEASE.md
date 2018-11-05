@@ -17,28 +17,30 @@ Once the project moves into development, the press release can be used as a touc
  -->
  
 ## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
+  > Learn about things that interest you and plan your day accordingly.
 
 ## Sub-Heading ##
   > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
-  This app benefit the tourist and anybody who wants to plan there day for 
+  This app educates tourists about things going on in the city they are visiting.  Its also useful for locals who want to maximize their time with interesting and enjoyable activities.
 ## Summary ##
   > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
-
+  Search for the best events and places near you, select what sounds fun and add it to your calendar to plan out an awesome day.
 ## Problem ##
   > Describe the problem your product solves.
-
+  Helping users find things they want to do and scheduling an eventful day.
 ## Solution ##
   > Describe how your product elegantly solves the problem.
-
+  Dang! What should I do today searches for top rated establishments on Yelp and popular events on Eventbrite to curate activities for users to add to their schedule.
+  
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
+  > Dang!
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
+  > Sign up for an account, then search for events near you.
 
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  > Dang!!!
 
 ## Closing and Call to Action ##
   > Wrap it up and give pointers where the reader should go next.
+  Now you got a good understand on what the app do just sign up today and start plan your vaction or look for events near you.
