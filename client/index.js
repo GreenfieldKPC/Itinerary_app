@@ -15,10 +15,10 @@ const Navi = Vue.component('navi', {
             <li>
               <a id="navbar-toggle">Close <i class="fa fa-bars menu-icon fa-2x" aria-hidden="true"></i></a>
             </li>
-            <li>
+            <li @click="flip()">
               <a href <router-link to="/home">Home<i class="fa fa-home menu-icon fa-2x" aria-hidden="true"></i></a>
             </li>
-            <li>
+            <li @click="flip()">
               <a href <router-link to="/profile">Profile<i class="fa fa-cog menu-icon fa-2x" aria-hidden="true"></i></a>
             </li>
             <li>
@@ -37,11 +37,11 @@ const Navi = Vue.component('navi', {
     show() {
       return !is_visitor;
     },
+    flip() {
+      console.log('clicked');
+      showResults = !showResults;
+    },
   },
-});
-
-const Profile = Vue.component('profile', {
-
 });
 
 // LOG IN COMPONENET
@@ -79,8 +79,10 @@ const Login = Vue.component('login', {
         headers: new Headers(),
         body: JSON.stringify({ username: user, password: pass }),
       }).then((response) => {
-        console.log(response, 'RESPONSE IN CLIENT');
-        if (response) {
+        console.log(response.status, 'RESPONSE IN CLIENT');
+        if (response.status === 404) {
+          alert('Click sign up to create an account, or try logging in with the correct info next time');
+        } else {
           fetch(`/interests?username=${this.usernameL}`).then((resp) => resp.json()).then((text) => {
             userInterests = text.interests;
             console.log(userInterests);
@@ -212,7 +214,7 @@ const Events = Vue.component('event', {
 const Interests = Vue.component('interest', {
   // html to render
   template: ` 
-  <div>
+  <div v-if="show()">
   <div id="profileInfo">
   </br>
   <h2> Update Profile Information </h2>
@@ -239,6 +241,9 @@ const Interests = Vue.component('interest', {
     };
   },
   methods: {
+    show() {
+      return showResults;
+    },
     isVisitor() {
       return is_visitor;
     },
