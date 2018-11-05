@@ -236,6 +236,18 @@ const Interests = Vue.component('interest', {
       @click="updateUserInterests(interest)">   <button type="button" class="btn btn-block btn-warning">{{ interest }} </button>  </div>
     </div>
   </div>
+  </br>
+  </br>
+  </br>
+  </br>
+  </br>
+  </br>
+  </br>
+  </br>
+  </br>
+  </br>
+  </br>
+  </br>
 </div>
   `,
   props: ['interest', 'userClick'],
@@ -369,7 +381,7 @@ const app = new Vue({
         .then(res => res.json()).then((result) => {
           result = JSON.parse(result);
           // limit number of results
-          this.events = result.events.slice(0, 5);
+          this.events = result.events.slice(0, 15);
         });
       // fetch(`/interest/`)
     },
