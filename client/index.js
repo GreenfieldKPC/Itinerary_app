@@ -57,7 +57,7 @@ const Login = Vue.component('login', {
         <input type="password" placeholder="Enter password" v-model="passwordL">
       </div>
       <div class="col-md-8">
-        <button class="login" value="Login" @click="login.call(this, usernameL, passwordL)"> LOG IN </button>
+        <button class="login btn btn-default" value="Login" @click="login.call(this, usernameL, passwordL)"> LOG IN </button>
       </div>
     </div>
 </div>
@@ -118,7 +118,7 @@ const Signup = Vue.component('signup', {
         <input type="password" placeholder="Confirm password" v-model="passConf">
       </div>
       <div class="col-md-8">
-        <button class="signup" value="SignUp" @click="signup.call(this, username, email, password, passConf)"> SIGN UP </button>
+        <button class="signup btn btn-default" value="SignUp" @click="signup.call(this, username, email, password, passConf)"> SIGN UP </button>
       </div>
     </div>
 </div>
