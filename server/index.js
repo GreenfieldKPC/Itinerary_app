@@ -141,6 +141,9 @@ app.get('/event/:locationId', (req, res) => {
   });
 });
 
+// app.get('/interests/:username', (req, res) => {
+
+// });
 // app.get('/signup', function (req, res) {
 //   res.render('signup');
 // });
