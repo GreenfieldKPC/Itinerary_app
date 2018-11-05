@@ -15,10 +15,10 @@ const Navi = Vue.component('navi', {
             <li>
               <a id="navbar-toggle">Close <i class="fa fa-bars menu-icon fa-2x" aria-hidden="true"></i></a>
             </li>
-            <li>
+            <li @click="flip()">
               <a href <router-link to="/home">Home<i class="fa fa-home menu-icon fa-2x" aria-hidden="true"></i></a>
             </li>
-            <li>
+            <li @click="flip()">
               <a href <router-link to="/profile">Profile<i class="fa fa-cog menu-icon fa-2x" aria-hidden="true"></i></a>
             </li>
             <li>
@@ -39,7 +39,7 @@ const Navi = Vue.component('navi', {
     },
     flip() {
       console.log('clicked');
-      showResults = true;
+      showResults = !showResults;
     },
   },
 });
