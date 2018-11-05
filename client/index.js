@@ -162,7 +162,7 @@ const Interests = Vue.component('interest', {
   </br>
   <h2> Update Profile Information </h2>
   <input type="text" placeholder="enter new email address"> <button>UPDATE EMAIL </button> </input> </br> </br>
-  <input type="password" placeholder="enter new password"> <input type="text" placeholder="confirm password"> <button>UPDATE PASSWORD </button> </input>
+  <input type="password" placeholder="enter new password"> <input type="password" placeholder="confirm password"> <button>UPDATE PASSWORD </button> </input>
   </div>
   </br>
   <h2> Interests </h2>
