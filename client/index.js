@@ -327,7 +327,7 @@ const app = new Vue({
     return {
       // updates from v-model text input search
       geolocation: '',
-      location: 'new orleans',
+      location: '',
       interests: ['business', 'education', 'performing and arts', 'sports', 'film and media', 'community and culture', 'charity and causes', 'travel and outdoor', 'science and technology', 'health and wellness', 'fashion', 'seasonal', 'regional', 'government', 'home and lifestyle', 'other'],
       results: [ { businesses: "CLICK SEARCH TO GET STARTED" } ],
 
@@ -348,7 +348,7 @@ const app = new Vue({
       return !is_visitor;
     },
     geoLocate() {
-      console.log('clicked');
+      this.location = 'New Orleans';
       if (navigator.geolocation) {
         const self = this;
         navigator.geolocation.getCurrentPosition((position) => {
