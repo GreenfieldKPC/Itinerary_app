@@ -16,17 +16,18 @@
 </head>
 
 <body>
+<!-- V if logged in?  would have to be in main app component -->
 
-  <div class="sidebar">
+<div class="sidebar">
     <ul class="sidebar-nav">
       <li>
         <a id="navbar-toggle">Close <i class="fa fa-bars menu-icon fa-2x" aria-hidden="true"></i></a>
       </li>
       <li>
-        <a href="#">Home<i class="fa fa-home menu-icon fa-2x" aria-hidden="true"></i></a>
+          <router-link to="/home">  <a href="#/home">Home<i class="fa fa-home menu-icon fa-2x" aria-hidden="true"></i></a></router-link> 
       </li>
       <li>
-        <a href="/interestsPage">Interests<i class="fa fa-search-plus menu-icon fa-2x" aria-hidden="true"></i></a>
+          <router-link to="/interestsPage">   <a href="#/interestsPage">  Interests<i class="fa fa-search-plus menu-icon fa-2x" aria-hidden="true"></i></a></router-link> 
       </li>
       <li>
         <a href="#">Profile<i class="fa fa-cog menu-icon fa-2x" aria-hidden="true"></i></a>
@@ -41,95 +42,61 @@
   
     </ul>
   </div>
+ 
+  
+ <!-- END NAV BAR -->
   <main id="app">
-     <router-link to="/logIn"><button>Log In</button></router-link>
+   
+    <!-- LOG IN AND SIGN UP BUTTONS -->
+    <div id="logAndSignButtons" v-if="isVisitor()">
+     <router-link to="/logIn"><button>Log In</button>
+    </router-link>
           <router-link to="/signUp"> <button>Sign Up</button></router-link>
-          <router-view></router-view>
-      <!-- <router-link to="/logIn"></router-link>
-      <router-link to="/signUp"></router-link> -->
-      <!-- <div><a href="/signup">
-        <button > SIGN UP </button></a></div>
-        <div><a href="/login"><button>LOG IN</button></a> </div> -->
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="page-header">
-          <h1>
-            What's The Name Of Our App? <small>Itinerary builder</small>
-          </h1>
-        </div>
-        
-        <div class="location-input">
-          <input type="text" placeholder="Enter location" @keyup.enter="search.call(this, location)" v-model="location">
-          <input type="submit" value="Search" @click="search.call(this, location)">
-        </div>
+         
+    </div>
 
-        <!-- side scrollspy for yelp results -->
-        <!-- maybe limit to 5-10 of each result type -->
-        <div class="container yelp-results">
-          <div class="row text-center">
-            <!-- list of results -->
-            <result class="col-xs-4" v-for="result in results" :business="result"></result>
-          </div>
-        </div>
-        <div class="container-fluid interests" id="accordion">
-          <div class="row text-center">
-            <interest class="col-md-3"
-            v-for="interest in interests" :interest="interest"
-            @click="clickOninterest(interest.clicked)"></interest>
-          </div>
-        </div>
-        <!-- collapse for event results -->
-        <!-- maybe limit to 5-10 of each result type -->
-        <div class="container event-results">
-          <h3>Click event for details</h3>
-          <div class="event-results"id="card-317479">
-            <event v-for="event in events" :event="event" :key="event.id"></event>
+    <!-- TITLE/HEADER-->
+    <router-view>
+    </router-view>
+
+    <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="page-header">
+              <h1>
+                What's The Name Of Our App? <small>Itinerary builder</small>
+              </h1>
+            </div>
+
+            
+            <!-- LOCATION SEARCH BAR-->
+            <div class="location-input" v-if="loggedInUser()">
+              <input type="text" placeholder="Enter location" @keyup.enter="search.call(this, location)" v-model="location">
+              <input type="submit" value="Search" @click="search.call(this, location)">
+              <button id="geoLocator" @click="geoLocate()">Get My Location</button>
+            </div>
+    
+            <!-- side scrollspy for yelp results -->
+            <!-- maybe limit to 5-10 of each result type -->
+            <div class="container yelp-results" v-if="loggedInUser()">
+              <div class="row text-center">
+                <!-- list of results -->
+                <result class="col-xs-4" v-for="result in results" :business="result"></result>
+              </div>
+            </div>
+          
+            <!-- collapse for event results -->
+            <!-- maybe limit to 5-10 of each result type -->
+            <div class="container event-results" v-if="loggedInUser()">
+              <h3>Click event for details</h3>
+              <div class="event-results"id="card-317479">
+                <event v-for="event in events" :event="event" :key="event.id"></event>
+              </div>
+            </div> 
           </div>
         </div>
       </div>
-    </div>
 
-
-<tr v-for="interest in interests">
-  <td @click="clickOninterest(interest.clicked)">{{interests}}</td>
-</tr>
-<!-- </div> -->
-</div>
-   
-    <div id="itenerary" v-if="loggedInUser()">
-    <table id="foodTable">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Location</th>
-          <th>Phone #</th>
-          <th>Rating</th>
-        </tr>
-      </thead>
-      <tbody>
-          <!-- <tr><result v-for="result in results" :business="result"></result> </tr> -->
-      </tbody>
-    </table>
-    <table id="eventTable">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <!-- <th>add calander</th> -->
-        </tr>
-      </thead>
-      <tbody>
-        <!-- <tr v-for="event in events">
-          <td @click="toggle = !toggle">{{event.name.text}}</td> -->
-          <!-- <button @click="toggle = !toggle">show description</button> -->
-          <!-- <td v-show="toggle">{{event.description.text}}</td>
-          <td @click="add()">Add to Calander</td>
-        </tr> -->
-      </tbody>
-    </table>
-
-  </div>
   </main>
   
   <script type="text/javascript" src="index.js"></script>

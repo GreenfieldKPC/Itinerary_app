@@ -180,6 +180,7 @@ const logIn = (user, callback) => {
     }
   });
 };
+
 module.exports.logIn = logIn;
 module.exports.UserProfile = UserProfile;
 module.exports.createUserProfile = createUserProfile;
