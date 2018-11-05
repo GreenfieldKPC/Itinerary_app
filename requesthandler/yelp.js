@@ -25,7 +25,7 @@ const getEvent = function (location ,callback) {
   let cap = location[0].toUpperCase() + location.substr(1);
   request.get({
 
-    url: `https://www.eventbriteapi.com/v3//events/search/?location.address=${cap}&location.within=25km`,
+    url: `https://www.eventbriteapi.com/v3/events/search/?location.address=${cap}&location.within=25km`,
 
     headers: {
       'Authorization': `${config.Event}`,
@@ -44,8 +44,15 @@ const getEvent = function (location ,callback) {
   });
 };
 
+const getUserInterest = function (callback) {
+
+  request.get({
+    url: `https://www.eventbriteapi.com/v3/event/search/?categories=`
+  })
+};
 
 module.exports = {
   getTopRestaurants,
   getEvent,
+  getUserInterest,
 };
