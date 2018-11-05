@@ -16,6 +16,7 @@
 </head>
 
 <body>
+<<<<<<< HEAD
 <!-- V if logged in?  would have to be in main app component -->
 
     <div id='navi' v-if="show()">
@@ -48,12 +49,14 @@
  
   
  <!-- END NAV BAR -->
+=======
+>>>>>>> ffe61937370e3bed3d4bef60db3ead2be14fa1fe
   <main id="app">
-    
-   
+    <!-- V if logged in?  would have to be in main app component -->
+   <Navi></Navi>   
     <!-- TITLE/HEADER-->
-    
-
+  
+    <div class="container-fluid" id="view">
     <div class="container-fluid">
         <div class="row">
           <div class="col-md-12">
@@ -101,12 +104,9 @@
             </div> 
           </div>
         </div>
-        
-     
         </div>
     </div>
-    
-
+    </div>
   </main>
   
   <script type="text/javascript" src="index.js"></script>
@@ -122,12 +122,12 @@
         $('#navbar-toggle').click(function () {
           if (state == "expanded") {
             $('.sidebar').css('margin-left', '-180px');
-            $('main').css('margin-left', '10vw');
+            $('#view').css('margin-left', '10vw');
             state = "minimized";
           } else {
             if (state == "minimized") {
               $('.sidebar').css('margin-left', '0px');
-              $('main').css('margin-left', '20vw');
+              $('#view').css('margin-left', '20vw');
               state = "expanded";
             }
           }
