@@ -27,7 +27,7 @@ const Events = Vue.component('event', {
                 <div class="card-body">
                 <img v-bind:src='event.logo.url'/><br>
                   {{ event.description.text }}<br>
-                  <a href="event.url">Website</a><br>
+                  <a :href="event.url">Website</a><br>
                   <a :href="calendarURL" target="_blank">Add to Calendar</a>
                 </div>
               </div>
@@ -47,19 +47,20 @@ const Events = Vue.component('event', {
 
 const Interests = Vue.component('interest', {
   template: `<div class="top-buffer">
-  <button type="button" class="btn btn-block btn-warning">{{ interest }}</button>
+  <button type="button" @click="updateUserInterests(interest)" class="btn btn-block btn-warning">{{ interest }}</button>
   </div>`,
-  props: ['interest'],
+  props: ['interest', 'flick'],
   methods: {
     addToSearch() {
       // change color to green
       // add interest to api call to eventbrite
 
     },
-    updateUserInterests() {
+    updateUserInterests(e) {
       // change button color to green
       // add interest to user profile if user is logged in
-
+      console.log('clicked', e);
+      this.flick(e);
     },
   },
 });
@@ -216,7 +217,15 @@ const app = new Vue({
       return 'https://www.google.com/calendar/render?action=TEMPLATE';
     },
     clickOninterest(clicked) {
-      clicked = !clicked;
+      if(this.usersInterest.length === 0) {
+        this.usersInterest.push(clicked);
+      }
+      for (let i = 0; i < this.usersInterest.length; i++){
+        if(this.usersInterest[i] !== clicked) {
+          this.usersInterest.push(clicked);
+        }
+      }
+      
     },
     selected (e) {
       // //$(e.currentTarget).css('background', '#41c69e')

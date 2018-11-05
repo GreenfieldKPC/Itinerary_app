@@ -66,7 +66,7 @@
           <div class="row text-center">
             <interest class="col-md-3"
             v-for="interest in interests" :interest="interest"
-            @click="clickOninterest(interest.clicked)"></interest>
+            :flick="clickOninterest"></interest>
           </div>
         </div>
         <!-- collapse for event results -->

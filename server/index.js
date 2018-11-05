@@ -82,7 +82,16 @@ app.get('/interests', (req, res) => {
       res.send(err);
     } else {
       // return array of interests
-      res.send(interests);
+    //   res.send(interests);
+    handler.getUserInterest(interests, (err, result) => {
+        if(err) {
+            console.log(err);
+            res.send(err);
+        }   else {
+            console.log(result, 'what');
+            res.send(result);
+        }
+    })
     }
   });
 });
