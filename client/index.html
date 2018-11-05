@@ -22,16 +22,15 @@
     <!-- TITLE/HEADER-->
   
     <div class="container-fluid" id="view">
-    <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-12">
             <div class="page-header">
               <h1>
                 What's The Name Of Our App? <small>Itinerary builder</small>
               </h1>
             </div>
  <!-- LOG IN AND SIGN UP BUTTONS -->
-  <div id="logAndSignButtons" v-if="isVisitor()">
+      <div id="logAndSignButtons" v-if="isVisitor()">
     <div class="container-fluid">
       <div class="row text-center">
         <div class="col-md-6">
@@ -44,12 +43,11 @@
         </div>
       </div>
    </div>
-            <router-view>
-              </router-view>
+      </div>
+        <router-view>
+          </router-view>
             <!-- LOCATION SEARCH BAR-->
-            <div v-if="loggedInUser()">
-              
-            <div class="location-input">
+            <div class="location-input" v-if="loggedInUser()">
              
               <input type="text" placeholder="Enter location" @keyup.enter="search.call(this, location)" v-model="location">
               <input type="submit" value="Search" @click="search.call(this, location)">
@@ -73,10 +71,8 @@
                 <event v-for="event in events" :event="event" :key="event.id"></event>
               </div>
             </div> 
-          </div>
         </div>
-        </div>
-    </div>
+      </div>
     </div>
   </main>
   
