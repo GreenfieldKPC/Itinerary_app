@@ -25,6 +25,7 @@
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-react": "^7.11.1",
     "express": "^4.16.4",
+    "express-session": "^1.15.6",
     "jquery": "^3.3.1",
     "mongodb": "^3.1.8",
     "mongoose": "^5.3.7",
@@ -33,6 +34,7 @@
     "request": "^2.88.0",
     "vue": "^2.5.17",
     "vue-cli": "^2.9.6",
+    "vue-router": "^3.0.1",
     "yarn": "^1.10.1"
   },
   "devDependencies": {

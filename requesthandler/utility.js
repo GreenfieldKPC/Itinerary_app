@@ -10,10 +10,11 @@ const checkUser = function (req, res, next) {
     next();
   }
 };
+
 const createSession = function (req, res, newUser) {
   return req.session.regenerate(() => {
     req.session.user = newUser;
-    res.redirect('/');
+    res.send(JSON.stringify({ newUser }));
   });
 };
 module.exports = {

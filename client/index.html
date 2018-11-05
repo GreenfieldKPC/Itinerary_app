@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.1/vue-router.min.js"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
     crossorigin="anonymous">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <link rel="stylesheet" type="text/css" href="style.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,126 +16,97 @@
 </head>
 
 <body>
-  <div class="sidebar">
-    <ul class="sidebar-nav">
-      <li>
-        <a id="navbar-toggle">Close <i class="fa fa-bars menu-icon fa-2x" aria-hidden="true"></i></a>
-      </li>
-      <li>
-        <a href="#">Home<i class="fa fa-home menu-icon fa-2x" aria-hidden="true"></i></a>
-      </li>
-      <li>
-        <a href="#">Interests<i class="fa fa-search-plus menu-icon fa-2x" aria-hidden="true"></i></a>
-      </li>
-      <li>
-        <a href="#">Profile<i class="fa fa-cog menu-icon fa-2x" aria-hidden="true"></i></a>
-      </li>
-      <li>
-        <a href="#">Calender<i class="fa fa-calendar menu-icon fa-2x" aria-hidden="true"></i></a>
-      </li>
-      <li>
-        <a href="#">log out<i class="fa fa-sign-out menu-icon fa-2x" aria-hidden="true"></i>
-        </a>
-      </li>
+<!-- V if logged in?  would have to be in main app component -->
+<Navi>
+    <div id='navi' v-if="show()">
+        <div class="sidebar" >
+            <ul class="sidebar-nav">
+              <li>
+                <a id="navbar-toggle">Close <i class="fa fa-bars menu-icon fa-2x" aria-hidden="true"></i></a>
+              </li>
+              <li>
+                  <router-link to="/home">  <a href="#/home">Home<i class="fa fa-home menu-icon fa-2x" aria-hidden="true"></i></a></router-link> 
+              </li>
+              <li>
+                  <router-link to="/interestsPage">   <a href="#/interestsPage">  Interests<i class="fa fa-search-plus menu-icon fa-2x" aria-hidden="true"></i></a></router-link> 
+              </li>
+              <li>
+                  <router-link to="/profilePage"><a href="#">Profile<i class="fa fa-cog menu-icon fa-2x" aria-hidden="true"></i></a></router-link>
+              </li>
+              <li>
+                <a href="#">Calender<i class="fa fa-calendar menu-icon fa-2x" aria-hidden="true"></i></a>
+              </li>
+              <li>
+                <a href="#">log out<i class="fa fa-sign-out menu-icon fa-2x" aria-hidden="true"></i>
+                </a>
+              </li>
+          
+            </ul>
+          </div>
+        </div>
+      </Navi>
+ 
   
-    </ul>
-  </div>
+ <!-- END NAV BAR -->
   <main id="app">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="page-header">
-          <h1>
-            What's The Name Of Our App? <small>Itinerary builder</small>
-          </h1>
+    
+   
+    <!-- TITLE/HEADER-->
+    
+
+    <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="page-header">
+              <h1>
+                What's The Name Of Our App? <small>Itinerary builder</small>
+              </h1>
+            </div>
+ <!-- LOG IN AND SIGN UP BUTTONS -->
+ <div id="logAndSignButtons" v-if="isVisitor()">
+    <router-link to="/logIn"><button>Log In</button>
+   </router-link>
+         <router-link to="/signUp"> <button>Sign Up</button></router-link>
+        
+   </div>
+
+            <router-view>
+              </router-view>
+            <!-- LOCATION SEARCH BAR-->
+            <div v-if="loggedInUser()">
+              
+            <div class="location-input">
+             
+              <input type="text" placeholder="Enter location" @keyup.enter="search.call(this, location)" v-model="location">
+              <input type="submit" value="Search" @click="search.call(this, location)">
+              <button id="geoLocator" @click="geoLocate()">Get My Location</button>
+            </div>
+    
+            <!-- side scrollspy for yelp results -->
+            <!-- maybe limit to 5-10 of each result type -->
+            <div class="container yelp-results">
+              <div class="row text-center">
+                <!-- list of results -->
+                <result class="col-xs-4" v-for="result in results" :business="result"></result>
+              </div>
+            </div>
+          
+            <!-- collapse for event results -->
+            <!-- maybe limit to 5-10 of each result type -->
+            <div class="container event-results" v-if="loggedInUser()">
+              <h3>Click event for details</h3>
+              <div class="event-results"id="card-317479">
+                <event v-for="event in events" :event="event" :key="event.id"></event>
+              </div>
+            </div> 
+          </div>
         </div>
         
-        <div class="location-input">
-          <input type="text" placeholder="Enter location" @keyup.enter="search.call(this, location)" v-model="location">
-          <input type="submit" value="Search" @click="search.call(this, location)">
+     
         </div>
-
-        <!-- side scrollspy for yelp results -->
-        <!-- maybe limit to 5-10 of each result type -->
-        <div class="container yelp-results">
-          <div class="row text-center">
-            <!-- list of results -->
-            <result class="col-xs-4" v-for="result in results" :business="result"></result>
-          </div>
-        </div>
-        <div class="container-fluid interests" id="accordion">
-          <div class="row text-center">
-            <interest class="col-md-3"
-            v-for="interest in interests" :interest="interest"
-            @click="clickOninterest(interest.clicked)"></interest>
-          </div>
-        </div>
-        <!-- collapse for event results -->
-        <!-- maybe limit to 5-10 of each result type -->
-        <div class="container event-results" id="itenerary" v-if="loggedInUser()">
-          <h3>Click event for details</h3>
-          <div class="event-results"id="card-317479">
-            <event v-for="event in events" :event="event" :key="event.id"></event>
-          </div>
-        </div>
-      </div>
     </div>
+    
 
-    <input type="text" placeholder="Enter location" v-model="location">
-    <input type="submit" value="Search" @click="search.call(this, location)">
-<div id="loginAndSignUp" v-if="visitor()">
-    <div id="login" v-show="visitor"> <a href="/login">
-        <input type="text" placeholder="Enter username" v-model="usernameL">
-        <input type="password" placeholder="Enter password" v-model="passwordL">
-    <button class="login" value="Login" @click="login.call(this, usernameL, passwordL)"> LOG IN</button>
-  </a>
-  </div>
-  <div id="signup"v-show="visitor"> <a href="/signup">
-      <input type="text" placeholder="Enter username" v-model="username">
-      <input type="text" placeholder="Enter email" v-model="email"> </br>
-      <input type="password" placeholder="Enter password" v-model="password">
-      <input type="password" placeholder="Confirm password" v-model="passConf">
-  <button class="signup" value="SignUp" @click="signup.call(this, username, email, password, passConf)"> SIGN UP</button>
-</a>
-<tr v-for="interest in interests">
-  <td @click="clickOninterest(interest.clicked)">{{interests}}</td>
-</tr>
-</div>
-</div>
-   
-    <div id="itenerary" v-if="loggedInUser()">
-    <table id="foodTable">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Location</th>
-          <th>Phone #</th>
-          <th>Rating</th>
-        </tr>
-      </thead>
-      <tbody>
-          <!-- <tr><result v-for="result in results" :business="result"></result> </tr> -->
-      </tbody>
-    </table>
-    <table id="eventTable">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <!-- <th>add calander</th> -->
-        </tr>
-      </thead>
-      <tbody>
-        <!-- <tr v-for="event in events">
-          <td @click="toggle = !toggle">{{event.name.text}}</td> -->
-          <!-- <button @click="toggle = !toggle">show description</button> -->
-          <!-- <td v-show="toggle">{{event.description.text}}</td>
-          <td @click="add()">Add to Calander</td>
-        </tr> -->
-      </tbody>
-    </table>
-
-  </div>
   </main>
   
   <script type="text/javascript" src="index.js"></script>

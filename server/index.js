@@ -1,27 +1,24 @@
 const express = require('express');
+const session = require('express-session');
 const bodyParser = require('body-parser');
 const path = require('path');
-
 const db = require('../database/index'); // needs to require towards the database
-
-
 const handler = require('../requesthandler/yelp.js'); // this helper get the information from the yelp api
 const util = require('../requesthandler/utility.js');
-
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(session({
+  secret: 'its a secret',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true },
+}));
 app.use(express.static(path.join(__dirname, '/../client'))); // path to the front end
 
-// endpoints for views
-// app.get('/')
-// app.get('/', (req, res) => {
-//   res.status(200).send(index.js);
-// });
 
 // homepage is search view
 app.get('/search', (req, res) => {
@@ -33,30 +30,42 @@ app.get('/profile', (req, res) => {
 
 });
 
-// login/signup page routes to either form
-// app.get('/login', (req, res) => {
-//   res.render('login');
-// });
-
-// app.get('/signup', function (req, res) {
-//   res.render('signup');
-// });
-
-
-// add user profile to database
-// req.body needs username, email, password, passwordConf (short for password confirmation)
-app.post('/signup', (req, res) => {
-    req.on('data', (chunk)=>{
-        let userObj = JSON.parse(chunk);
-        db.createUserProfile(userObj, (err) => {
-    if (err) {
-      // notify user of error
-      console.error(err, 'error signing up');
-    }
+// LOGIN
+app.post('/login', (req, res) => {
+  req.on('data', (chunk) => {
+    const user = JSON.parse(chunk);
+    console.log(user);
+    db.logIn(user, (err, bool) => {
+      console.log(bool, 'boolean');
+      if (err) {
+        console.log(err);
+        res.send(false);
+      } else if (bool) {
+        console.log('LOGGED IN');
+        
+        // create session and redirect
+        util.createSession(req, res, user.username);
+        //res.redirect('/');
+      } else {
+        console.log('NOT A USER');
+        res.sendStatus(404);
+      }
+    });
   });
-    })
-   
+});
 
+// SIGN UP
+app.post('/signup', (req, res) => {
+  req.on('data', (chunk) => {
+    const userObj = JSON.parse(chunk);
+    console.log(userObj, 'gothere');
+    db.createUserProfile(userObj, (err) => {
+      if (err) {
+      // notify user of error
+        console.error(err, 'error signing up');
+      }
+    });
+  });
   res.end();
 });
 
@@ -75,14 +84,16 @@ app.patch('/interests', (req, res) => {
 // get user interests
 // query database by username, receive array of interests
 app.get('/interests', (req, res) => {
+  console.log('triggered');
   db.getUserInterests(req.query.username, (err, interests) => {
     if (err) {
       // notify user of error
       console.error(err, 'error getting interests');
       res.send(err);
     } else {
+      console.log(interests, 'interests');
       // return array of interests
-      res.send(interests);
+      res.send(JSON.stringify({ interests }));
     }
   });
 });
@@ -99,15 +110,10 @@ app.patch('/profile', (req, res) => {
   res.end();
 });
 
-// log in user
-// app.post('/login', (req, res) => {
-
-// });
-
 // endpoint for deleting account
 // app.delete('/delete')
 
-
+// YELP SEARCH
 app.get('/loc/:locationID', (req, res) => {
   const location = req.path.slice(5);
 
@@ -115,46 +121,24 @@ app.get('/loc/:locationID', (req, res) => {
     if (err) {
       console.log(err, 'ERROR IN SERVER');
     } else {
-
-    res.send(JSON.stringify(result.body));
+      console.log(result.body);
+      // sort by interests??????
+      res.send(JSON.stringify(result.body));
     }
   });
 });
 
+// EVENT SEARCH
 app.get('/event/:locationId', (req, res) => {
-
-  
   const location = req.path.slice(5);
   handler.getEvent(location, (err, result) => {
     if (err) {
       console.log(err, 'events');
     } else {
+      // console.log(result.body);
       res.send(JSON.stringify(result.body));
-
     }
   });
-});
-
-app.post('/login', (req, res) => {
-    const user = req.body
-
-    db.logIn(user, (err, bool)=>{
-        if (err) {
-            console.log(err);
-            res.send(false)
-        } else {
-            if (bool) {
-                //create session and redirect
-                util.createSession(req, res, user.username);
-                res.send(true);
-            }
-        }
-        res.send(false);
-    });
-});
-
-app.get('/login', (req, res) => {
-  res.render('login');
 });
 
 // app.get('/signup', function (req, res) {
@@ -183,7 +167,6 @@ app.get('/login', (req, res) => {
 // }
 
 // */
-
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
