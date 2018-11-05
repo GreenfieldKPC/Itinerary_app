@@ -236,6 +236,18 @@ const Interests = Vue.component('interest', {
       @click="updateUserInterests(interest)">   <button type="button" class="btn btn-block btn-warning">{{ interest }} </button>  </div>
     </div>
   </div>
+  </br>
+  </br>
+  </br>
+  </br>
+  </br>
+  </br>
+  </br>
+  </br>
+  </br>
+  </br>
+  </br>
+  </br>
 </div>
   `,
   props: ['interest', 'userClick'],
