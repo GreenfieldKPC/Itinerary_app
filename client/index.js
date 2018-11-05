@@ -169,13 +169,8 @@ const Events = Vue.component('event', {
                 <div class="card-body">
                 <img v-bind:src='event.logo.url'/><br>
                   {{ event.description.text }}<br>
-<<<<<<< HEAD
-                  <a href="event.url">Website</a><br>
-                  <a @click="add()" :href="calendarURL" target="_blank">Add to Calendar</a>
-=======
                   <a :href="event.url" target="_blank"> Website</a><br>
                   <a :href="calendarURL" target="_blank">Add to Calendar</a>
->>>>>>> afc867bd710e2ff45d55882ea43c027e22e60ec2
                 </div>
               </div>
             </div>`,
@@ -208,7 +203,7 @@ const Interests = Vue.component('interest', {
   </div>
   </br>
   <h2> Interests </h2>
-  <div class="container-fluid interests" id="accordion">
+  <div class="container-fluid interests">
   <div class="row text-center">
     <div class="col-md-3"
     v-for="interest in interests" :interest="interest"
