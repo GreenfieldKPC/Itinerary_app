@@ -48,6 +48,7 @@ app.get('/profile', (req, res) => {
 app.post('/signup', (req, res) => {
   req.on('data', (chunk) => {
     const userObj = JSON.parse(chunk);
+    console.log(userObj, 'gothere');
     db.createUserProfile(userObj, (err) => {
       if (err) {
       // notify user of error

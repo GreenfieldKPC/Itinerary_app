@@ -2,21 +2,26 @@
 // import VueRouter from 'vue-router';
 // Vue.use(VueRouter);
 
-const login = {
+const Login = Vue.component('login', {
   template: `
-  <div id="loginAndSignUp" v-if="visitor()">
-  <div id="login" v-show="visitor"> <a href="/login">
+  <div id="login"> 
       <input type="text" placeholder="Enter username" v-model="usernameL">
       <input type="password" placeholder="Enter password" v-model="passwordL">
   <button class="login" value="Login" @click="login.call(this, usernameL, passwordL)"> LOG IN</button>
 </a>
 </div>
   `,
-};
+  data() {
+    return {
+      usernameL: '',
+      passwordL: '',
+    };
+  },
+});
 
-const signup = {
+const Signup = Vue.component('signup', {
   template: `
-  <div id="signup"v-show="visitor"> <a href="/signup">
+  <div id="signup">
   <input type="text" placeholder="Enter username" v-model="username">
   <input type="text" placeholder="Enter email" v-model="email"> </br>
   <input type="password" placeholder="Enter password" v-model="password">
@@ -25,15 +30,39 @@ const signup = {
 </a>
 </div>
   `,
-};
+
+  data() {
+    return {
+      username: '',
+      email: '',
+      password: '',
+      passConf: '',
+    };
+  },
+  methods: {
+    signup(username, email, password, passwordConf) {
+      console.log(username, email, password, passwordConf);
+      fetch('/signup', {
+        method: 'POST',
+        headers: new Headers(),
+        body: JSON.stringify({
+          username, email, password, passwordConf,
+        }),
+      }).then((response) => {
+        console.log(response);
+      });
+    },
+  },
+
+});
 
 const routes = [
   {
     path: '/login',
-    component: login,
+    component: Login,
   }, {
     path: '/signup',
-    component: signup,
+    component: Signup,
   },
 ];
 
@@ -117,6 +146,8 @@ const app = new Vue({
     result: Result,
     event: Events,
     interest: Interests,
+    login: Login,
+    signup: Signup,
   },
 
   data() {
@@ -124,12 +155,8 @@ const app = new Vue({
 
       // updates from v-model text input search
       location: '',
-      usernameL: '',
-      passwordL: '',
-      username: '',
-      email: '',
-      password: '',
-      passConf: '',
+
+
       // array of businesses returned from location query to yelp api
       interests: ['business', 'education', 'performing and arts', 'sports', 'film and media', 'community and culture', 'charity and causes', 'travel and outdoor', 'science and technology', 'health and wellness', 'fashion', 'seasonal', 'regional', 'government', 'home and lifestyle', 'other'],
       results: [],
@@ -211,9 +238,9 @@ const app = new Vue({
 
 
   methods: {
-    visitor() {
-      return true;
-    },
+    // visitor() {
+    //   return true;
+    // },
     loggedInUser() {
       return true;
     },
@@ -223,18 +250,6 @@ const app = new Vue({
         method: 'POST',
         headers: new Headers(),
         body: JSON.stringify({ user, pass }),
-      });
-    },
-    signup(username, email, password, passwordConf) {
-      console.log(username, email, password, passwordConf);
-      fetch('/signup', {
-        method: 'POST',
-        headers: new Headers(),
-        body: JSON.stringify({
-          username, email, password, passwordConf,
-        }),
-      }).then((response) => {
-        console.log(response);
       });
     },
     search(location) {
