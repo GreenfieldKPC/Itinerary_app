@@ -229,7 +229,6 @@ const app = new Vue({
     login: Login,
     signup: Signup,
     home: Home,
-    navi: Navi,
   },
 
   data() {
