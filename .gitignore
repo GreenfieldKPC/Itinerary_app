@@ -28,6 +28,6 @@ dist/
 node_modules/
 bower_components/
 .vscode/
-config.js
-package-lock.json
+# config.js
+# package-lock.json
 
