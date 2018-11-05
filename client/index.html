@@ -23,57 +23,55 @@
     <!-- TITLE/HEADER-->
 
     <div class="container-fluid" id="view">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-12">
             <div class="page-header">
               <h1>
                 DANG! <small> what should I do today? </small>
               </h1>
             </div>
-            <!-- LOG IN AND SIGN UP BUTTONS -->
-            <div id="logAndSignButtons" v-if="isVisitor()">
-              <router-link to="/logIn"><button>Log In</button>
-              </router-link>
-              <router-link to="/signUp"> <button>Sign Up</button></router-link>
-
-            </div>
-
-            <router-view>
-            </router-view>
+ <!-- LOG IN AND SIGN UP BUTTONS -->
+      <div id="logAndSignButtons" v-if="isVisitor()">
+    <div class="container-fluid">
+      <div class="row text-center">
+        <div class="col-md-8">
+          <router-link to="/logIn"><button type="button" class="btn btn-block btn-warning">Log In</button></router-link>
+        </div>
+      </div> 
+      <div class="row text-center">
+        <div class="col-md-8">
+          <router-link to="/signUp"><button type="button" class="btn btn-block btn-warning">Sign Up</button></router-link>
+        </div>
+      </div>
+   </div>
+      </div>
+        <router-view>
+          </router-view>
             <!-- LOCATION SEARCH BAR-->
-            <div v-if="loggedInUser()">
-
-              <div class="location-input">
-
-                <input type="text" placeholder="Enter location" @keyup.enter="search.call(this, location)" v-model="location">
-                <input type="submit" value="Search" @click="search.call(this, location)">
-                <button id="geoLocator" @click="geoLocate()">Get My Location</button>
-              </div>
+            <div class="location-input" v-if="loggedInUser()">
              
-              <!-- side scrollspy for yelp results -->
-              <!-- maybe limit to 5-10 of each result type -->
-              <div class="container yelp-results">
-                <div class="row text-center">
-                  <!-- list of results -->
-                  <result class="col-xs-4" v-for="result in results" :business="result"></result>
-                </div>
-              </div>
-
-              <!-- collapse for event results -->
-              <!-- maybe limit to 5-10 of each result type -->
-              <div class="container event-results" v-if="loggedInUser()">
-                <h3>Click event for details</h3>
-                <div class="event-results" id="card-317479">
-                  <event v-for="event in events" :event="event" :key="event.id"></event>
-                  
-                </div>
-              
-              
-              
+              <input type="text" placeholder="Enter location" @keyup.enter="search.call(this, location)" v-model="location">
+              <input type="submit" value="Search" @click="search.call(this, location)">
+              <button id="geoLocator" @click="geoLocate()">Get My Location</button>
+            </div>
+    
+            <!-- side scrollspy for yelp results -->
+            <!-- maybe limit to 5-10 of each result type -->
+            <div class="container yelp-results">
+              <div class="row text-center">
+                <!-- list of results -->
+                <result class="col-xs-4" v-for="result in results" :business="result"></result>
               </div>
             </div>
-          </div>
+          
+            <!-- collapse for event results -->
+            <!-- maybe limit to 5-10 of each result type -->
+            <div class="container event-results" v-if="loggedInUser()">
+              <h3>Click event for details</h3>
+              <div class="event-results"id="card-317479">
+                <event v-for="event in events" :event="event" :key="event.id"></event>
+              </div>
+            </div> 
         </div>
       </div>
     </div>

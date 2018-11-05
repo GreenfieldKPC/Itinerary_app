@@ -51,11 +51,18 @@ const Navi = Vue.component('navi', {
 const Login = Vue.component('login', {
   // html to render
   template: `
-  <div id="login" > 
-      <input type="text" placeholder="Enter username" v-model="usernameL">
-      <input type="password" placeholder="Enter password" v-model="passwordL">
-  <button class="login" value="Login" @click="login.call(this, usernameL, passwordL)"> LOG IN</button>
-</a>
+  <div id="login" class="container-fluid"> 
+    <div class='row text-center'>
+      <div class="col-md-8">
+        <input type="text" placeholder="Enter username" v-model="usernameL">
+      </div>
+      <div class="col-md-8">
+        <input type="password" placeholder="Enter password" v-model="passwordL">
+      </div>
+      <div class="col-md-8">
+        <button class="login btn btn-default" value="Login" @click="login.call(this, usernameL, passwordL)"> LOG IN </button>
+      </div>
+    </div>
 </div>
   `,
   // value of input fields for username and password
@@ -101,13 +108,24 @@ const Login = Vue.component('login', {
 const Signup = Vue.component('signup', {
   // html to render
   template: `
-  <div id="signup">
-  <input type="text" placeholder="Enter username" v-model="username">
-  <input type="text" placeholder="Update" v-model="email"> </br>
-  <input type="password" placeholder="Enter password" v-model="password">
-  <input type="password" placeholder="Confirm password" v-model="passConf">
-<button class="signup" value="SignUp" @click="signup.call(this, username, email, password, passConf)"> SIGN UP</button>
-</a>
+  <div id="signup" class="container-fluid">
+  <div class='row text-center'>
+      <div class="col-md-8">
+        <input type="text" placeholder="Enter username" v-model="username">
+      </div>
+      <div class="col-md-8">
+        <input type="text" placeholder="Enter email address" v-model="email">
+      </div>
+      <div class="col-md-8">
+        <input type="password" placeholder="Enter password" v-model="password">
+      </div>
+      <div class="col-md-8">
+        <input type="password" placeholder="Confirm password" v-model="passConf">
+      </div>
+      <div class="col-md-8">
+        <button class="signup btn btn-default" value="SignUp" @click="signup.call(this, username, email, password, passConf)"> SIGN UP </button>
+      </div>
+    </div>
 </div>
   `,
   // input fields for signup
@@ -208,7 +226,7 @@ const Interests = Vue.component('interest', {
   </div>
   </br>
   <h2> Interests </h2>
-  <div class="container-fluid interests" id="accordion">
+  <div class="container-fluid interests">
   <div class="row text-center">
     <div class="col-md-3"
     v-for="interest in interests" :interest="interest" 
