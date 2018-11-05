@@ -135,7 +135,17 @@ const updateInterests = (updateObj, cb) => {
 // changes value of property on user profile
 const updateProfile = (username, propObj, cb) => {
   const query = { username };
-  UserProfile.updateOne(query, propObj, (err) => {
+  const setObj = {};
+  console.log(propObj);
+  if (Object.keys(propObj)[0] === 'password') {
+    console.log('hit');
+    setObj.password = Object.values(propObj)[0];
+    setObj.passwordConf = Object.values(propObj)[0];
+    console.log(setObj);
+  } else {
+    setObj = propObj;
+  }
+  UserProfile.updateOne(query, { $set: setObj }, (err) => {
     if (err) {
       console.error(err);
       cb(err, 'error updating interest');
