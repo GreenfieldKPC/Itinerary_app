@@ -16,10 +16,10 @@ const Navi = Vue.component('navi', {
               <a id="navbar-toggle">Close <i class="fa fa-bars menu-icon fa-2x" aria-hidden="true"></i></a>
             </li>
             <li>
-              <a href=<router-link to="/home">Home<i class="fa fa-home menu-icon fa-2x" aria-hidden="true"></i></a>
+              <a href <router-link to="/home">Home<i class="fa fa-home menu-icon fa-2x" aria-hidden="true"></i></a>
             </li>
             <li>
-              <a href=<router-link to="/profile">Profile<i class="fa fa-cog menu-icon fa-2x" aria-hidden="true"></i></a>
+              <a href <router-link to="/profile">Profile<i class="fa fa-cog menu-icon fa-2x" aria-hidden="true"></i></a>
             </li>
             <li>
               <a href="#">Calender<i class="fa fa-calendar menu-icon fa-2x" aria-hidden="true"></i></a>
