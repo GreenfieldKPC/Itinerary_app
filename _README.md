@@ -1,12 +1,12 @@
-# Project Name
+# Dang!! What should I do today?
+Find things you want to do and scheduling an eventful day.
 
-> Pithy project description
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Kevin
+  - __Scrum Master__: Patrick
+  - __Development Team Members__: Kevin, Patrick, Constance
 
 ## Table of Contents
 
@@ -21,14 +21,15 @@
 ## Usage
 
 > Some usage instructions
-
+- Vue v2.5
+- Express v4.16
+- MongoDB v3.1
 ## Requirements
 
-- Node 0.10.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+- Node 8.x
+- Vue 2.x
+- Mongo 3.x
+- 
 
 ## Development
 
@@ -44,7 +45,7 @@ bower install
 
 ### Roadmap
 
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
+View the project roadmap [here](https://github.com/GreenfieldKPC/Itinerary_app)
 
 
 ## Contributing
