@@ -50,4 +50,4 @@ View the project roadmap [here](https://github.com/GreenfieldKPC/Itinerary_app)
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+See [CONTRIBUTING.md](https://github.com/GreenfieldKPC/Itinerary_app/blob/master/CONTRIBUTING.md) for contribution guidelines.
