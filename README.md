@@ -27,9 +27,7 @@ Find things you want to do and scheduling an eventful day.
 ## Requirements
 
 - Node 8.x
-- Vue 2.x
 - Mongo 3.x
-- 
 
 ## Development
 
