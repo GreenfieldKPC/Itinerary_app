@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const mLAB_URI = require('../config').mLAB_URI;
+const { mLAB_URI } = require('../config');
 
 mongoose.connect(mLAB_URI, { useNewUrlParser: true });
 
@@ -115,17 +115,6 @@ const updateInterests = (updateObj, cb) => {
     if (err) {
       console.error(err);
       cb(err, 'error updating interest');
-    } else {
-      // profile.updated_at = Date.now();
-      // let prop = Object.keys(setObject)[0];
-      // console.log(Object.keys(profile.interests), 'bool');
-      // profile[Object.keys(setObject)[0]] = !profile[Object.keys(setObject)[0]];
-      // profile.save((err) => {
-      //     if (err) {
-      //         console.error(err, 'error saving updated interest');
-      //         cb(err);
-      //     }
-      // })
     }
   });
 };
@@ -135,7 +124,7 @@ const updateInterests = (updateObj, cb) => {
 // changes value of property on user profile
 const updateProfile = (username, propObj, cb) => {
   const query = { username };
-  const setObj = {};
+  let setObj = {};
   console.log(propObj);
   if (Object.keys(propObj)[0] === 'password') {
     console.log('hit');
@@ -175,8 +164,8 @@ const getUserInterests = (username, cb) => {
 };
 
 const logIn = (user, callback) => {
-  const username = user.username;
-  const password = user.password;
+  const { username } = user;
+  const { password } = user;
   UserProfile.find({ username }, (err, docs) => {
     if (err) {
       callback(err, false);
