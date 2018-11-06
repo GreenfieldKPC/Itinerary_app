@@ -27,9 +27,7 @@ Find things you want to do and scheduling an eventful day.
 ## Requirements
 
 - Node 8.x
-- Vue 2.x
 - Mongo 3.x
-- 
 
 ## Development
 
@@ -50,4 +48,4 @@ View the project roadmap [here](https://github.com/GreenfieldKPC/Itinerary_app)
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+See [CONTRIBUTING.md](https://github.com/GreenfieldKPC/Itinerary_app/blob/master/_CONTRIBUTING.md) for contribution guidelines.
