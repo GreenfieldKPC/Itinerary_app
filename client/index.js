@@ -41,9 +41,6 @@ const Navi = Vue.component('navi', {
       console.log('clicked');
       showResults = !showResults;
     },
-    ifFlipped() {
-      return !showResults;
-    }
   },
 });
 
@@ -65,7 +62,6 @@ const Login = Vue.component('login', {
     </div>
 </div>
   `,
-  props: ['usersInterest'],
   // value of input fields for username and password
   data() {
     return {
@@ -87,9 +83,11 @@ const Login = Vue.component('login', {
         if (response.status === 404) {
           alert('Click sign up to create an account, or try logging in with the correct info next time');
         } else {
-          fetch(`/interests?username=${this.usernameL}`).then((resp) => resp.json()).then((text) => {
+          fetch(`/interests?username=${this.usernameL}`).then(resp => resp.json()).then((text) => {
             userInterests = text.interests;
-            return this.$parent.usersInterest;
+            console.log(userInterests);
+          }).catch((err) => {
+            console.log(err, 'error getting interests');
           });
           // fetch(`/loc/${location}`)
           is_visitor = false;
@@ -99,11 +97,6 @@ const Login = Vue.component('login', {
           }
         }
       });
-      // fetch('/interest', {
-      //   method: 'PATCH',
-      //   headers: new Headers(),
-      //   body: JSON.stringify({ username: user, interest: this.$parent.userInterests }),
-      // }).then(res => res.json()).then(response => response);
     },
   },
 });
@@ -193,11 +186,20 @@ const Events = Vue.component('event', {
                 </a>
               </div>
               <div id="card-element-356590" class="collapse">
-                <div class="card-body">
-                <img v-bind:src='event.logo.url'/><br>
-                  {{ event.description.text }}<br>
-                  <a :href="event.url" target="_blank"> Website</a><br>
-                  <a :href="calendarURL" target="_blank">Add to Calendar</a>
+                <div class="card-body row text-center">
+                <div id="event-image-box" class="col-md-6">
+                  <img v-bind:src='event.logo.url'/>
+                </div>
+                  <div id="event-description-box" class="col-md-6">
+                    <h5> Event description </h5>
+                    {{ event.description.text }}
+                  </div>
+                  <div class="col-md-6 event-links">
+                    <button class="btn btn-outline-light" :href="event.url" target="_blank"> <h4>Event website</h4> </button>
+                  </div>
+                  <div class="col-md-6 event-links">
+                    <button class="btn btn-outline-light" :href="calendarURL" target="_blank"> <h4>Add to Calendar</h4> </button>
+                  </div>
                 </div>
               </div>
             </div>`,
@@ -212,6 +214,7 @@ const Events = Vue.component('event', {
   // necessary function?
   methods: {
     add() {
+      // add to favorites?
       console.log('hello');
     },
   },
@@ -236,18 +239,6 @@ const Interests = Vue.component('interest', {
       @click="updateUserInterests(interest)">   <button type="button" class="btn btn-block btn-warning">{{ interest }} </button>  </div>
     </div>
   </div>
-  </br>
-  </br>
-  </br>
-  </br>
-  </br>
-  </br>
-  </br>
-  </br>
-  </br>
-  </br>
-  </br>
-  </br>
 </div>
   `,
   props: ['interest', 'userClick'],
@@ -277,13 +268,13 @@ const Interests = Vue.component('interest', {
       // change button color to green
       // add interest to user profile if user is logged in
       this.$parent.clickOninterest(e);
-      // this.userClick(e);
+      this.userClick(e);
     },
   },
 });
 
 const Home = Vue.component('home', {
-
+  // don't delete!!!
 });
 
 // ROUTES
@@ -321,19 +312,17 @@ const app = new Vue({
     login: Login,
     signup: Signup,
     home: Home,
+    navi: Navi,
   },
 
   data() {
     return {
       // updates from v-model text input search
       geolocation: '',
-      location: '',
+      location: 'new orleans',
       interests: ['business', 'education', 'performing and arts', 'sports', 'film and media', 'community and culture', 'charity and causes', 'travel and outdoor', 'science and technology', 'health and wellness', 'fashion', 'seasonal', 'regional', 'government', 'home and lifestyle', 'other'],
-      results: [ { businesses: "CLICK SEARCH TO GET STARTED" } ],
-
+      results: [],
       events: [],
-      //       using a sample event, uncomment empty event array for api calls
-      //       events: [],
       toggle: true,
       usersInterest: [],
     };
@@ -348,7 +337,7 @@ const app = new Vue({
       return !is_visitor;
     },
     geoLocate() {
-      this.location = 'New Orleans';
+      console.log('clicked');
       if (navigator.geolocation) {
         const self = this;
         navigator.geolocation.getCurrentPosition((position) => {
@@ -381,9 +370,8 @@ const app = new Vue({
         .then(res => res.json()).then((result) => {
           result = JSON.parse(result);
           // limit number of results
-          this.events = result.events.slice(0, 15);
+          this.events = result.events.slice(0, 5);
         });
-      // fetch(`/interest/`)
     },
     add() {
       console.log('click');

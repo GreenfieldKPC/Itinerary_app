@@ -20,16 +20,6 @@ app.use(session({
 app.use(express.static(path.join(__dirname, '/../client'))); // path to the front end
 
 
-// homepage is search view
-app.get('/search', (req, res) => {
-
-});
-
-// profile view for user to see and update info
-app.get('/profile', (req, res) => {
-
-});
-
 // LOGIN
 app.post('/login', (req, res) => {
   req.on('data', (chunk) => {
@@ -140,36 +130,6 @@ app.get('/event/:locationId', (req, res) => {
     }
   });
 });
-
-// app.get('/interests/:username', (req, res) => {
-
-// });
-// app.get('/signup', function (req, res) {
-//   res.render('signup');
-// });
-// /*
-// endpoints for yelp get request
-// https://api.yelp.com/v3/businesses/search
-// https://api.yelp.com/v3/businesses/{id}
-// { location: req.body.location,
-//   rating: req.body.rating,
-//   hours: req.body.hours,
-//   name: req.body.name,
-//   phone: req.body.name,
-//   id: req.body.id }
-
-// https://api.yelp.com/v3/events/{id}
-// { location: req.body.location,
-//   start: req.body.time_start,
-//   end: req.body.time_end,
-//   name: req.body.name,
-//   phone: req.body.name,
-//   id: req.body.id
-//   latitude: req.body.latitude,
-//   longitude: req.body.longitude
-// }
-
-// */
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
